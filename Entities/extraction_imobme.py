@@ -6,8 +6,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from time import sleep
 from datetime import datetime
-from shutil import copy2
-from getpass import getuser
 from Entities.registro.registro import Registro
 
 
@@ -27,8 +25,8 @@ class BotExtractionImobme():
             {'action' : self.finalizar, 'kargs' : {'target' : '//*[@id="login"]', 'exist' : False}} # se não achar o campo do login ele finaliza o roteiro
         ]
         self.ir_relatorios = [
-            {'action' : self.clicar, 'kargs' : {'target' : '/html/body/div/nav/ul/li[1]/a'}}, # clicar no icone dos relatorios
-            {'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Menu"]/ul/li[1]/div/ul/li/a'}}, # clica no botão gerar relatorios
+            {'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Menu"]/ul/li[3]/a'}}, # clicar no icone dos relatorios
+            {'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Menu"]/ul/li[3]/div/ul/li/a'}}, # clica no botão gerar relatorios
             {'action' : self.finalizar, 'kargs' : {'target' : '//*[@id="result-table"]/tbody', 'exist' : True}} # finaliza o roteiro se achar a lista dos relatorios
         ]
         self.verificar_lista = [
@@ -71,7 +69,7 @@ class BotExtractionImobme():
                 if (relatorio.lower() == "imobme_empreendimento") or (relatorio.lower() == "empreendimentos"):
                     verificar_se_tem_relatorios += 1
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
-                    self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn_o_6"]'}}) # clique em IMOBME - Empreendimento
+                    self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn_o_7"]'}}) # clique em IMOBME - Empreendimento
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/button'}})  # clique em selecionar Emprendimentos
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label/input'}}) # clique em selecionar todos os empreendimentos
@@ -81,7 +79,7 @@ class BotExtractionImobme():
                 elif (relatorio.lower() == "imobme_controle_vendas") or (relatorio.lower() == "vendas"):
                     verificar_se_tem_relatorios += 1
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
-                    self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn_o_1"]'}}) # clique em IMOBME - Contre de Vendas
+                    self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn_o_5"]'}}) # clique em IMOBME - Contre de Vendas
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataInicio"]', 'input' : "01012015"}})  # escreve a data de inicio padrao 01/01/2015
                     self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataFim"]', 'input' : datetime.now().strftime("%d%m%Y")}})  # escreve a data hoje
@@ -164,7 +162,7 @@ class BotExtractionImobme():
                                 ])
             
             #gerar relatorio
-            self.roteiro(self.gerar_relatorios)
+            self.roteiro(self.gerar_relatorios, emergency_break =100)
 
             #salvar os arquivos
             self.roteiro(self.verificar_lista)
@@ -179,7 +177,7 @@ class BotExtractionImobme():
                               {'action' : self.clicar, 'kargs' : {'target' : f'//*[@id="result-table"]/tbody/tr[{indice + 1}]/td[11]/a'}},
                               {'action' : self.finalizar, 'kargs' : {'target' : f'//*[@id="result-table"]/tbody/tr[{indice + 1}]/td[11]/a', 'exist' : True}}, 
                               {'action' : self.esperar, 'kargs' : {'segundos' : 6}}
-                                ])
+                                ], emergency_break =450)
             
             sleep(15)
             texto_error = "relatorios: " + str(self.relatorios) + "; foram baixados e salvos no diretorio " + str(self.caminho_download)
@@ -199,7 +197,7 @@ class BotExtractionImobme():
                 
             # return caminho_dos_arquivos
         
-    def roteiro(self, roteiro, emergency_break=60*60):
+    def roteiro(self, roteiro, emergency_break=5*60):
         contador = 0
         while True:
             for evento in roteiro:
