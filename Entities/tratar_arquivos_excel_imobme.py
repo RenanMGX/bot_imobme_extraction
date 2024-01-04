@@ -59,7 +59,7 @@ class ImobmeExceltoConvert():
                         csv_file = path_data + "\\" + file_name + ".csv"
                         df = df.replace('–', '-')
                         df.to_csv(csv_file , sep=';', index=False, encoding='latin1', errors='ignore', decimal=',')
-                        copytocsv = copyto  + csv_file.split("\\")[-1]
+                        copytocsv = copyto + datetime.now().strftime('%d-%m-%Y ') + csv_file.split("\\")[-1]
                         copy2(csv_file, copytocsv)
                         self.registrar_error.record(f"{arquivo};Salvo com sucesso no caminho {copyto}",tipo="Concluido")
 

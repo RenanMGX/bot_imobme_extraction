@@ -1,2 +1,14 @@
 2023-12-26T09:22:58.942203;extraction_imobme;Error;Exedeu o tempo limite do Emergency_break
 2023-12-26T09:43:28.996002;extraction_imobme;Error;Exedeu o tempo limite do Emergency_break
+2024-01-04T16:17:22.332858;extraction_imobme;Concluido;relatorios: ['imobme_dados_contrato', 'imobme_empreendimento']; foram baixados e salvos no diretorio R:\bot_imobme_extraction\downloads_IntegracaoWeb\
+2024-01-04T16:17:30.784677;tratar_arquivos_excel_imobme;Concluido;R:\bot_imobme_extraction\downloads_IntegracaoWeb\DadosContrato_23446_20240104-160907.xlsx;Salvo com sucesso no caminho temp_IntegracaoWeb\
+2024-01-04T16:17:38.662358;tratar_arquivos_excel_imobme;Concluido;R:\bot_imobme_extraction\downloads_IntegracaoWeb\Empreendimentos_23447_20240104-160907.xlsx;Salvo com sucesso no caminho temp_IntegracaoWeb\
+2024-01-04T16:44:21.322686;extraction_imobme;Concluido;relatorios: ['imobme_dados_contrato', 'imobme_empreendimento']; foram baixados e salvos no diretorio R:\bot_imobme_extraction\downloads_IntegracaoWeb\
+2024-01-04T16:44:28.828775;tratar_arquivos_excel_imobme;Concluido;R:\bot_imobme_extraction\downloads_IntegracaoWeb\DadosContrato_23448_20240104-163612.xlsx;Salvo com sucesso no caminho temp_IntegracaoWeb\
+2024-01-04T16:44:36.558463;tratar_arquivos_excel_imobme;Concluido;R:\bot_imobme_extraction\downloads_IntegracaoWeb\Empreendimentos_23449_20240104-163612.xlsx;Salvo com sucesso no caminho temp_IntegracaoWeb\
+2024-01-04T17:00:42.493110;extraction_imobme;Concluido;relatorios: ['imobme_dados_contrato', 'imobme_empreendimento']; foram baixados e salvos no diretorio R:\bot_imobme_extraction\downloads_IntegracaoWeb\
+2024-01-04T17:00:50.817420;tratar_arquivos_excel_imobme;Concluido;R:\bot_imobme_extraction\downloads_IntegracaoWeb\DadosContrato_23452_20240104-165227.xlsx;Salvo com sucesso no caminho temp_IntegracaoWeb\
+2024-01-04T17:00:58.236740;tratar_arquivos_excel_imobme;Concluido;R:\bot_imobme_extraction\downloads_IntegracaoWeb\Empreendimentos_23453_20240104-165237.xlsx;Salvo com sucesso no caminho temp_IntegracaoWeb\
+2024-01-04T17:21:38.174071;extraction_imobme;Concluido;relatorios: ['imobme_dados_contrato', 'imobme_empreendimento']; foram baixados e salvos no diretorio R:\bot_imobme_extraction\downloads_IntegracaoWeb\
+2024-01-04T17:21:46.179896;tratar_arquivos_excel_imobme;Concluido;R:\bot_imobme_extraction\downloads_IntegracaoWeb\DadosContrato_23457_20240104-171408.xlsx;Salvo com sucesso no caminho temp_IntegracaoWeb\
+2024-01-04T17:21:53.927895;tratar_arquivos_excel_imobme;Concluido;R:\bot_imobme_extraction\downloads_IntegracaoWeb\Empreendimentos_23458_20240104-171418.xlsx;Salvo com sucesso no caminho temp_IntegracaoWeb\
