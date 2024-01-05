@@ -1,3 +1,5 @@
+import sys
+sys.path.append("Entities")
 from Entities.tratar_arquivos_excel_imobme import ImobmeExceltoConvert
 from Entities.extraction_imobme import BotExtractionImobme
 from Entities.credential.carregar_credenciais import Credential
