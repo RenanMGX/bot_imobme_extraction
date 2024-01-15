@@ -1,10 +1,12 @@
+import sys
+sys.path.append("Entities")
 import pandas as pd
 import xlwings as xw
 import os
 from datetime import datetime
 from shutil import copy2
 from time import sleep
-from Entities.registro.registro import Registro
+from registro.registro import Registro
 
 class ImobmeExceltoConvert():
     def __init__(self):
@@ -59,7 +61,18 @@ class ImobmeExceltoConvert():
                         csv_file = path_data + "\\" + file_name + ".csv"
                         df = df.replace('–', '-')
                         df.to_csv(csv_file , sep=';', index=False, encoding='latin1', errors='ignore', decimal=',')
-                        copytocsv = copyto + datetime.now().strftime('%d-%m-%Y ') + csv_file.split("\\")[-1]
+                        copytocsv = copyto + datetime.now().strftime('%d-%m-%Y_') + csv_file.split("\\")[-1]
+                        copy2(csv_file, copytocsv)
+                        self.registrar_error.record(f"{arquivo};Salvo com sucesso no caminho {copyto}",tipo="Concluido")
+
+                    if tipo == "csv_integra_web":
+                        if "Empreendimentos" in file_name:
+                            df = self.tratar_df_empreendimento(df)
+
+                        csv_file = path_data + "\\" + file_name + ".csv"
+                        df = df.replace('–', '-')
+                        df.to_csv(csv_file , sep=';', index=False, encoding='latin1', errors='ignore', decimal=',')
+                        copytocsv = copyto + datetime.now().strftime('%d-%m-%Y_') + csv_file.split("\\")[-1]
                         copy2(csv_file, copytocsv)
                         self.registrar_error.record(f"{arquivo};Salvo com sucesso no caminho {copyto}",tipo="Concluido")
 
@@ -81,7 +94,7 @@ class ImobmeExceltoConvert():
                 self.registrar_error.record(f"{arquivo};Arquivo não encontrado")
                 continue
             except Exception as error:
-                print(f"{arquivo} : {type(error)} ---> {error.with_traceback()}")
+                print(f"{arquivo} : {type(error)} ---> {error}")
                 self.registrar_error.record(f"{arquivo};{type(error)};{error}")
             
             
@@ -90,13 +103,41 @@ class ImobmeExceltoConvert():
             os.unlink(path_data + "\\" + data)
         os.rmdir(path_data)
 
+    def tratar_df_empreendimento(self, df):
+        colunas_para_remover = [
+            'Área Terreno',
+            'Área Construída',
+            'Valor Reconstrução',
+            'Matrícula',
+            'Registro',
+            'PEP Empreendimento',
+            'Número De Unidades',
+            'Data Da Opção da Planta Fase',
+            'Andar Início',
+            'Andar Fim',
+            'Data Opção Planta Bloco',
+            'Data Habite-se Bloco',
+            'Número Do Andar',
+            'Código Do Final',
+            'Número De Dormitórios',
+            'Número De Banheiro',
+            'PEP Personalização'
+        ]
+        colunas = df.columns.to_list()
+        for remover in colunas_para_remover:
+            colunas.pop(colunas.index(remover))
+        
+        return df[colunas]
+
 
 if __name__ == "__main__":
-    pass    
-    #tratar = ImobmeExceltoConvert()
+    #pass    
+    tratar = ImobmeExceltoConvert()
 
     #tratar.tratar_arquivos(["eqwdsa\\aboteste.xlsx", "te\\teste.xlsx"],path_data="dados_samba", copyto=r"C:\Users\renan.oliveira\Downloads")
-
+    df = pd.read_excel("downloads_IntegracaoWeb\\Empreendimentos_23891_20240115-114346.xlsx", sheet_name="IMOBME - Empreendimento")
+    print(df)
+    #tratar.tratar_df_empreendimento(df)
 
     # lista_arquivos = os.listdir("dados")
     # cont = 0

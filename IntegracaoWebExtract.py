@@ -29,7 +29,7 @@ if __name__ == "__main__":
     caminho_temp = "temp_IntegracaoWeb"
     if not os.path.exists(caminho_temp):
        os.makedirs(caminho_temp)
-    conversor.tratar_arquivos(arquivos, path_data="dados_IntegracaoWeb", tipo="csv", copyto=caminho_temp)
+    conversor.tratar_arquivos(arquivos, path_data="dados_IntegracaoWeb", tipo="csv_integra_web", copyto=caminho_temp)
 
     arquivos_do_temp = []
     for arqui in os.listdir(caminho_temp):
@@ -38,16 +38,17 @@ if __name__ == "__main__":
     from credential_sftp import crendencial_sftp_apart
     crendencial_sftp = crendencial_sftp_apart
     
-    transfer = TransferenciaSFTP(crendencial_sftp)
-    for arqui in arquivos_do_temp:
-        nome_arquivo = arqui.split('\\')[-1]
-        try:
-            transfer.transferir(arqui, f"public_html/bases/{nome_arquivo}")
-        except TimeoutError:
-            reg.record("TimeoutError;Uma tentativa de conexão falhou porque o componente conectado não respondeu corretamente após um período de tempo ou a conexão estabelecida falhou porque o host conectado não respondeu")
-
+    #transferir arquivo via SFTP
+    # transfer = TransferenciaSFTP(crendencial_sftp)
     # for arqui in arquivos_do_temp:
-    #     copy2(arqui, r"C:\Users\renan.oliveira\Downloads")
+    #     nome_arquivo = arqui.split('\\')[-1]
+    #     try:
+    #         transfer.transferir(arqui, f"public_html/bases/{nome_arquivo}")
+    #     except TimeoutError:
+    #         reg.record("TimeoutError;Uma tentativa de conexão falhou porque o componente conectado não respondeu corretamente após um período de tempo ou a conexão estabelecida falhou porque o host conectado não respondeu")
+
+    for arqui in arquivos_do_temp:
+        copy2(arqui, r"C:\Users\renan.oliveira\Downloads")
 
     for arqui_del in os.listdir(caminho_temp):
         os.unlink(caminho_temp + "\\" + arqui_del)
