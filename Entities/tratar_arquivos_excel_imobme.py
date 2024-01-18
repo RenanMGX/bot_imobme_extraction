@@ -126,8 +126,82 @@ class ImobmeExceltoConvert():
         colunas = df.columns.to_list()
         for remover in colunas_para_remover:
             colunas.pop(colunas.index(remover))
+
+        df = df[colunas]
+
+        linhas_remover = [
+            'Acqua Galleria Condomínio Resort - Condomínio 1',
+            'Acqua Galleria Condomínio Resort - Condomínio 2',
+            'Acqua Galleria Condomínio Resort - Condomínio 3',
+            'Edifício Adelaide Santiago',
+            'Edifício Adelaide Santiago - Avulsos',
+            'Edifício Apogée - Avulsos',
+            'Edifício Avignon - Avulsos',
+            'Edifício Brooklyn',
+            'Edifício Brooklyn - Avulsos',
+            'Edifício Gioia Del Colle',
+            'Edifício Jornalista Oswaldo Nobre',
+            'Edifício Key Biscayne',
+            "Edifício L'Essence - Avulsos",
+            'Edifício Maura Valadares Gontijo',
+            'Edifício Mayfair Offices',
+            'Edifício Nashville',
+            'Edifício Neuchâtel',
+            'Edifício Neuchâtel - Avulsos',
+            'Edifício Niagara Falls - Edifício Angel Falls - Edifício Victoria Falls',
+            'Edifício Olga Chiari',
+            'Edifício Professor Danilo Ambrósio',
+            'Edifício Saint Emilion',
+            'Edifício Saint Tropez',
+            'Edifício Saint Tropez - Avulsos',
+            'Edifício Soho Square',
+            'Edifício Tribeca Square',
+            'Edifício Vivaldi Moreira [Holiday Inn]',
+            'Four Seasons Condomínio Resort',
+            'Greenport Residences',
+            'Greenwich Village',
+            'Manhattan Square',
+            'Manhattan Square - Avulsos',
+            'Mia Felicitá Condomínio',
+            'Olga Gutierrez - Avulsos',
+            'Palo Alto Residences',
+            'Palo Alto Residences - Avulsos',
+            'Park Residence Condomínio Resort',
+            'Park Residence Condomínio Resort - Avulsos',
+            'Priorato Residence',
+            'Quintas do Morro',
+            'Residencial Porto Fino',
+            'Residencial Ruth Silveira e Ruth Silveira Stores',
+            'Residencial Springfield',
+            'The Plaza',
+            'The Plaza - Avulsos',
+            'Union Square',
+            'Unique - Avulsos',
+            'Villaggio Gutierrez',
+            'Villaggio Gutierrez - Avulsos',
+        ]
+
+        for linha in linhas_remover:
+            df = df[df['Nome Do Empreendimento'] != linha]
+
+        status_remover = [
+            'Quitada',
+            #'Vendida',
+            #'Bloqueada',
+            'Permuta',
+            #'Análise de Crédito / Risco',
+            #'Contratos - Validação',
+            #'Em Efetivação',
+            #'Disponível'
+        ]
+        for status in status_remover:
+            df = df[df['Status Da Unidade'] != status]
+
+        df = df[df['Tipo Do Bloco'] != 'Vagas Autônomas']
         
-        return df[colunas]
+        return df
+
+
 
 
 if __name__ == "__main__":
@@ -135,8 +209,14 @@ if __name__ == "__main__":
     tratar = ImobmeExceltoConvert()
 
     #tratar.tratar_arquivos(["eqwdsa\\aboteste.xlsx", "te\\teste.xlsx"],path_data="dados_samba", copyto=r"C:\Users\renan.oliveira\Downloads")
-    df = pd.read_excel("downloads_IntegracaoWeb\\Empreendimentos_23891_20240115-114346.xlsx", sheet_name="IMOBME - Empreendimento")
-    print(df)
+    #df = pd.read_excel("downloads_IntegracaoWeb\\Empreendimentos_23891_20240115-114346.xlsx", sheet_name="IMOBME - Empreendimento")
+    #print(df)
+
+    #"C:\Users\renan.oliveira\Downloads"
+
+    tratar.tratar_arquivos(['Empreendimentos.xlsx'], tipo="csv_integra_web",copyto="C:\\Users\\renan.oliveira\\Downloads")
+    
+
     #tratar.tratar_df_empreendimento(df)
 
     # lista_arquivos = os.listdir("dados")
