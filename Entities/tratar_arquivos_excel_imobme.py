@@ -103,7 +103,7 @@ class ImobmeExceltoConvert():
             os.unlink(path_data + "\\" + data)
         os.rmdir(path_data)
 
-    def tratar_df_empreendimento(self, df):
+    def tratar_df_empreendimento(self, df:pd.DataFrame):
         colunas_para_remover = [
             'Área Terreno',
             'Área Construída',
@@ -198,6 +198,9 @@ class ImobmeExceltoConvert():
             df = df[df['Status Da Unidade'] != status]
 
         df = df[df['Tipo Do Bloco'] != 'Vagas Autônomas']
+
+        #novar alterações solicitadas
+        #df["Área Privativa"] = df["Área Privativa"].astype(str).str.replace(".", "")
         
         return df
 

@@ -39,13 +39,13 @@ if __name__ == "__main__":
     crendencial_sftp = crendencial_sftp_apart
     
     #transferir arquivo via SFTP
-    # transfer = TransferenciaSFTP(crendencial_sftp)
-    # for arqui in arquivos_do_temp:
-    #     nome_arquivo = arqui.split('\\')[-1]
-    #     try:
-    #         transfer.transferir(arqui, f"public_html/bases/{nome_arquivo}")
-    #     except TimeoutError:
-    #         reg.record("TimeoutError;Uma tentativa de conexão falhou porque o componente conectado não respondeu corretamente após um período de tempo ou a conexão estabelecida falhou porque o host conectado não respondeu")
+    transfer = TransferenciaSFTP(crendencial_sftp)
+    for arqui in arquivos_do_temp:
+        nome_arquivo = arqui.split('\\')[-1]
+        try:
+            transfer.transferir(arqui, f"public_html/bases/{nome_arquivo}")
+        except TimeoutError:
+            reg.record("TimeoutError;Uma tentativa de conexão falhou porque o componente conectado não respondeu corretamente após um período de tempo ou a conexão estabelecida falhou porque o host conectado não respondeu")
 
     for arqui in arquivos_do_temp:
         copy2(arqui, r"C:\Users\renan.oliveira\Downloads")

@@ -36,3 +36,6 @@
 2024-01-18T16:57:09.677692;tratar_arquivos_excel_imobme;Concluido;Empreendimentos.xlsx;Salvo com sucesso no caminho C:\Users\renan.oliveira\Downloads\
 2024-01-18T17:54:24.558633;tratar_arquivos_excel_imobme;Concluido;Empreendimentos.xlsx;Salvo com sucesso no caminho C:\Users\renan.oliveira\Downloads\
 2024-01-18T18:00:05.071204;tratar_arquivos_excel_imobme;Concluido;Empreendimentos.xlsx;Salvo com sucesso no caminho C:\Users\renan.oliveira\Downloads\
+2024-01-19T16:07:18.174975;extraction_imobme;Concluido;relatorios: ['imobme_dados_contrato', 'imobme_empreendimento']; foram baixados e salvos no diretorio R:\bot_imobme_extraction\downloads_IntegracaoWeb\
+2024-01-19T16:07:30.568673;tratar_arquivos_excel_imobme;Concluido;R:\bot_imobme_extraction\downloads_IntegracaoWeb\DadosContrato_24011_20240119-155748.xlsx;Salvo com sucesso no caminho temp_IntegracaoWeb\
+2024-01-19T16:07:38.790206;tratar_arquivos_excel_imobme;Concluido;R:\bot_imobme_extraction\downloads_IntegracaoWeb\Empreendimentos_24012_20240119-155758.xlsx;Salvo com sucesso no caminho temp_IntegracaoWeb\
