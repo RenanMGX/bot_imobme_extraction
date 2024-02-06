@@ -88,7 +88,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn_o_5"]'}}) # clique em IMOBME - Contre de Vendas
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
-                    self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataInicio"]', 'input' : "01012015"}})  # escreve a data de inicio padrao 01/01/2015
+                    self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataInicio"]', 'input' : (datetime.now() - relativedelta(days=90)).strftime("%d%m%Y")  }})  # escreve a data de inicio padrao 01/01/2015
                     self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataFim"]', 'input' : datetime.now().strftime("%d%m%Y")}})  # escreve a data hoje
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="TipoDataSelecionada_chzn"]/a'}}) # clique em Tipo Data
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="TipoDataSelecionada_chzn_o_0"]'}}) # clique em Data Lançamento Venda
@@ -102,7 +102,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn_o_3"]'}}) # clique em IMOBME - Contratos Rescindicos
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
-                    self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataInicio"]', 'input' : "01012015"}})  # escreve a data de inicio padrao 01/01/2015
+                    self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataInicio"]', 'input' : (datetime.now() - relativedelta(days=90)).strftime("%d%m%Y")}})  # escreve a data de inicio padrao 01/01/2015
                     self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataFim"]', 'input' : datetime.now().strftime("%d%m%Y")}})  # escreve a data hoje
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="parametrosReport"]/div[2]/div/div[3]/div/button'}}) # clique em Tipo de Contrato
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="parametrosReport"]/div[2]/div/div[3]/div/ul/li[2]/a/label/input'}}) # clique em Todos
@@ -189,8 +189,11 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn_o_4"]'}}) # clique em IMOBME - Controle de Estoque
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="parametrosReport"]/div[2]/div[1]/div/div/button'}}) # clica em Empreendimentos
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}}) # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="parametrosReport"]/div[2]/div[1]/div/div/ul/li[2]/a/label/input'}}) # clica em todos
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}}) # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="parametrosReport"]/div[2]/div[1]/div/div/button'}}) # clica em Empreendimentos novamente para sair
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}}) # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataBase"]', 'input' : datetime.now().strftime("%d%m%Y")}})  # escreve a data hoje
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="GerarRelatorio"]'}}) # clica em gerar relatorio
 
@@ -265,9 +268,9 @@ class BotExtractionImobme():
                               {'action' : self.clicar, 'kargs' : {'target' : f'//*[@id="result-table"]/tbody/tr[{indice + 1}]/td[11]/a'}},
                               {'action' : self.finalizar, 'kargs' : {'target' : f'//*[@id="result-table"]/tbody/tr[{indice + 1}]/td[11]/a', 'exist' : True}}, 
                               {'action' : self.esperar, 'kargs' : {'segundos' : 6}}
-                                ], emergency_break =450)
+                                ], emergency_break =1000)
             
-            sleep(15)
+            sleep(5*60)
             texto_error = "relatorios: " + str(self.relatorios) + "; foram baixados e salvos no diretorio " + str(self.caminho_download)
             self.__registro_error.record(texto_error, tipo="Concluido")
             

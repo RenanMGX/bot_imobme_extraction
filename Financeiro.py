@@ -19,29 +19,74 @@ if __name__ == "__main__":
 
         bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
         conversor = ImobmeExceltoConvert()
-
         
-        bot_relatorio.obter_relatorios([
-            "imobme_previsao_receita",
-            "imobme_dados_contrato",
-            "imobme_relacao_clientes",
-            "imobme_cadastro_datas",
-            "imobme_empreendimento",
-            "recebimentos_compensados",
-            "imobme_contratos_rescindidos",
-            "imobme_controle_vendas",
-            "imobme_controle_estoque"
-
-        ])
-
-        arquivos = []
-        for files in os.listdir(down_path):
-            arquivos.append(down_path + files)
-
-        conversor.tratar_arquivos(arquivos, path_data="dados_financeiro", copyto=f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\')
-
+        try:        
+            bot_relatorio.obter_relatorios([
+                "imobme_dados_contrato",
+                "imobme_relacao_clientes"
+            ])
+            arquivos = []
+            for files in os.listdir(down_path):
+                arquivos.append(down_path + files)
+            conversor.tratar_arquivos(arquivos, path_data="dados_financeiro", copyto=f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\')
         
-    
+        except Exception as error:
+            reg.record(f"{type(error)};{error}")
+
+        try:
+            bot_relatorio.obter_relatorios([
+                "recebimentos_compensados",
+                "imobme_controle_vendas"
+            ])
+            arquivos = []
+            for files in os.listdir(down_path):
+                arquivos.append(down_path + files)
+            conversor.tratar_arquivos(arquivos, path_data="dados_financeiro", copyto=f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\')
+
+        except Exception as error:
+            reg.record(f"{type(error)};{error}")
+
+
+        try:
+            bot_relatorio.obter_relatorios([
+                "imobme_controle_estoque",
+                "imobme_contratos_rescindidos"
+            ])
+            arquivos = []
+            for files in os.listdir(down_path):
+                arquivos.append(down_path + files)
+            conversor.tratar_arquivos(arquivos, path_data="dados_financeiro", copyto=f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\')
+        
+        except Exception as error:
+            reg.record(f"{type(error)};{error}")
+
+        try:
+            bot_relatorio.obter_relatorios([
+                "imobme_cadastro_datas",
+                "imobme_empreendimento"
+            ])
+            arquivos = []
+            for files in os.listdir(down_path):
+                arquivos.append(down_path + files)
+            conversor.tratar_arquivos(arquivos, path_data="dados_financeiro", copyto=f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\')
+
+        except Exception as error:
+            reg.record(f"{type(error)};{error}")
+
+        try:
+            bot_relatorio.obter_relatorios([
+                "imobme_previsao_receita",
+            ])
+            arquivos = []
+            for files in os.listdir(down_path):
+                arquivos.append(down_path + files)
+            conversor.tratar_arquivos(arquivos, path_data="dados_financeiro", copyto=f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\')
+
+        except Exception as error:
+            reg.record(f"{type(error)};{error}")
+
+
+
     except Exception as error:
         reg.record(f"{type(error)};{error}")
     
