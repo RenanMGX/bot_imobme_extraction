@@ -102,6 +102,8 @@ class ImobmeExceltoConvert():
         for data in data_files:
             os.unlink(path_data + "\\" + data)
         os.rmdir(path_data)
+        
+        return True
 
     def tratar_df_empreendimento(self, df:pd.DataFrame):
         colunas_para_remover = [

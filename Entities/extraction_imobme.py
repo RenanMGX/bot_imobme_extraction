@@ -140,7 +140,9 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataInicio"]', 'input' : "01012015"}})  # escreve a data de inicio padrao 01/01/2015
                     self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataFim"]', 'input' : (datetime.now() + relativedelta(years=25)).strftime("%d%m%Y") }})  # escreve a data de fim padrao com a data atual mais 25 anos
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/button'}}) # clica em Empreendimentos
-                    self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label'}}) # clica em todos
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label/input'}}) # clica em todos
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/button'}}) # clica em Empreendimentos novamente para sair
                     self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataBase"]', 'input' : datetime.now().strftime("%d%m%Y") }})  # escreve a data de inicio padrao 01/01/2015
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="parametrosReport"]/div[4]/div/div[2]/div/button'}}) # clica em Tipo Parcela
@@ -270,7 +272,7 @@ class BotExtractionImobme():
                               {'action' : self.esperar, 'kargs' : {'segundos' : 6}}
                                 ], emergency_break =1000)
             
-            sleep(5*60)
+            sleep(60)
             texto_error = "relatorios: " + str(self.relatorios) + "; foram baixados e salvos no diretorio " + str(self.caminho_download)
             self.__registro_error.record(texto_error, tipo="Concluido")
             
