@@ -16,12 +16,13 @@ if __name__ == "__main__":
             raise PermissionError("Credenciais Invalidas")
 
         down_path = f"{os.getcwd()}\\downloads_financeiro\\"
-
-        bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
-        conversor = ImobmeExceltoConvert()
+        
 
         for x in range(5):
-            try:        
+            try:   
+                bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
+                conversor = ImobmeExceltoConvert()
+                
                 bot_relatorio.obter_relatorios([
                     "imobme_dados_contrato",
                     "imobme_relacao_clientes"
@@ -34,8 +35,19 @@ if __name__ == "__main__":
                     break
             except Exception as error:
                 reg.record(f"{type(error)};{error}")
+            finally:
+                try:
+                    bot_relatorio.navegador.close()
+                    del bot_relatorio
+                    del conversor
+                except:
+                    pass
+                
         for x in range(5):
             try:
+                bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
+                conversor = ImobmeExceltoConvert()
+                
                 bot_relatorio.obter_relatorios([
                     "recebimentos_compensados",
                     "imobme_controle_vendas"
@@ -48,9 +60,19 @@ if __name__ == "__main__":
                     break
             except Exception as error:
                 reg.record(f"{type(error)};{error}")
-
+            finally:
+                try:
+                    bot_relatorio.navegador.close()
+                    del bot_relatorio
+                    del conversor
+                except:
+                    pass
+                
         for x in range(5):
             try:
+                bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
+                conversor = ImobmeExceltoConvert()
+                
                 bot_relatorio.obter_relatorios([
                     "imobme_controle_estoque",
                     "imobme_contratos_rescindidos"
@@ -63,9 +85,19 @@ if __name__ == "__main__":
                     break
             except Exception as error:
                 reg.record(f"{type(error)};{error}")
-
+            finally:
+                try:
+                    bot_relatorio.navegador.close()
+                    del bot_relatorio
+                    del conversor
+                except:
+                    pass
+                
         for x in range(5):
             try:
+                bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
+                conversor = ImobmeExceltoConvert()
+                
                 bot_relatorio.obter_relatorios([
                     "imobme_cadastro_datas",
                     "imobme_empreendimento"
@@ -78,9 +110,19 @@ if __name__ == "__main__":
                     break
             except Exception as error:
                 reg.record(f"{type(error)};{error}")
-
+            finally:
+                try:
+                    bot_relatorio.navegador.close()
+                    del bot_relatorio
+                    del conversor
+                except:
+                    pass
+                
         for x in range(5):
             try:
+                bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
+                conversor = ImobmeExceltoConvert()
+                
                 bot_relatorio.obter_relatorios([
                     "imobme_previsao_receita",
                 ])
@@ -92,7 +134,13 @@ if __name__ == "__main__":
                     break
             except Exception as error:
                 reg.record(f"{type(error)};{error}")
-
+            finally:
+                try:
+                    bot_relatorio.navegador.close()
+                    del bot_relatorio
+                    del conversor
+                except:
+                    pass
 
     except Exception as error:
         reg.record(f"{type(error)};{error}")

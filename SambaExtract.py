@@ -9,16 +9,17 @@ from Entities.registro.registro import Registro
 
 if __name__ == "__main__":
     reg = Registro("SambaExtract.py")
+
+    crendential = Credential()
+    entrada = crendential.credencial()
+    if (entrada['usuario'] == None) or (entrada['senha'] == None):
+        raise PermissionError("Credenciais Invalidas")
+
+    down_path = f"{os.getcwd()}\\downloads_samba\\"
+
+    for x in range(10):
     
-    for x in range(5)
         try:
-            crendential = Credential()
-            entrada = crendential.credencial()
-            if (entrada['usuario'] == None) or (entrada['senha'] == None):
-                raise PermissionError("Credenciais Invalidas")
-
-            down_path = f"{os.getcwd()}\\downloads_samba\\"
-
             bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
             conversor = ImobmeExceltoConvert()
 
@@ -33,3 +34,10 @@ if __name__ == "__main__":
                 break
         except Exception as error:
             reg.record(f"{type(error)};{error}")
+        finally:
+            try:
+                bot_relatorio.navegador.close()
+                del bot_relatorio
+                del conversor
+            except:
+                pass
