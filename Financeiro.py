@@ -18,7 +18,7 @@ if __name__ == "__main__":
         down_path = f"{os.getcwd()}\\downloads_financeiro\\"
         
 
-        for x in range(5):
+        for x in range(3):
             try:   
                 bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
                 conversor = ImobmeExceltoConvert()
@@ -43,7 +43,7 @@ if __name__ == "__main__":
                 except:
                     pass
                 
-        for x in range(5):
+        for x in range(3):
             try:
                 bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
                 conversor = ImobmeExceltoConvert()
@@ -68,7 +68,7 @@ if __name__ == "__main__":
                 except:
                     pass
                 
-        for x in range(5):
+        for x in range(3):
             try:
                 bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
                 conversor = ImobmeExceltoConvert()
@@ -93,7 +93,7 @@ if __name__ == "__main__":
                 except:
                     pass
                 
-        for x in range(5):
+        for x in range(3):
             try:
                 bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
                 conversor = ImobmeExceltoConvert()
@@ -118,7 +118,7 @@ if __name__ == "__main__":
                 except:
                     pass
                 
-        for x in range(5):
+        for x in range(3):
             try:
                 bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
                 conversor = ImobmeExceltoConvert()

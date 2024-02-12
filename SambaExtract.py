@@ -17,8 +17,7 @@ if __name__ == "__main__":
 
     down_path = f"{os.getcwd()}\\downloads_samba\\"
 
-    for x in range(10):
-    
+    for x in range(3):
         try:
             bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
             conversor = ImobmeExceltoConvert()
