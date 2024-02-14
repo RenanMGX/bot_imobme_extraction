@@ -12,7 +12,6 @@ try:
 except ModuleNotFoundError:
     from registro.registro import Registro
 
-
 class BotExtractionImobme():
     def __init__(self,usuario=None,senha=None, caminho_download=f"{os.getcwd()}\\downloads\\"):
         self.__registro_error = Registro("extraction_imobme")
@@ -88,6 +87,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.coletar_id_relatorio, 'kargs' : {'target' : '//*[@id="result-table"]/tbody/tr[1]/td[1]'}}) #  # salva o numero do relatorio gerado em uma instancia global self.relatorios_id
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.finalizar_relatorio, 'kargs' : {'target' : '//*[@id="Content"]/section/div[2]/div[1]/div[1]/div'}}) # verifica para encerrar esté roteiro)
                 
                 # para gerar o relatorio 'Contole de Vendas'
                 elif (relatorio.lower() == "imobme_controle_vendas") or (relatorio.lower() == "vendas"):
@@ -108,6 +108,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.coletar_id_relatorio, 'kargs' : {'target' : '//*[@id="result-table"]/tbody/tr[1]/td[1]'}}) #  # salva o numero do relatorio gerado em uma instancia global self.relatorios_id
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.finalizar_relatorio, 'kargs' : {'target' : '//*[@id="Content"]/section/div[2]/div[1]/div[1]/div'}}) # verifica para encerrar esté roteiro)
                 
                 
                 # para gerar o relatorio 'Contrator Rescindidos'
@@ -131,6 +132,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.coletar_id_relatorio, 'kargs' : {'target' : '//*[@id="result-table"]/tbody/tr[1]/td[1]'}}) #  # salva o numero do relatorio gerado em uma instancia global self.relatorios_id
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.finalizar_relatorio, 'kargs' : {'target' : '//*[@id="Content"]/section/div[2]/div[1]/div[1]/div'}}) # verifica para encerrar esté roteiro)
                 
                 
                 # para gerar o relatorio 'Dados do Contrato'
@@ -157,6 +159,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.coletar_id_relatorio, 'kargs' : {'target' : '//*[@id="result-table"]/tbody/tr[1]/td[1]'}}) #  # salva o numero do relatorio gerado em uma instancia global self.relatorios_id
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.finalizar_relatorio, 'kargs' : {'target' : '//*[@id="Content"]/section/div[2]/div[1]/div[1]/div'}}) # verifica para encerrar esté roteiro)
                 
                 
                 # para gerar o relatorio 'Previsão de Receita'
@@ -167,11 +170,13 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataInicio"]', 'input' : "01012015"}})  # escreve a data de inicio padrao 01/01/2015
                     self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataFim"]', 'input' : (datetime.now() + relativedelta(years=25)).strftime("%d%m%Y") }})  # escreve a data de fim padrao com a data atual mais 25 anos
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/button'}}) # clica em Empreendimentos
-                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label/input'}}) # clica em todos
-                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/button'}}) # clica em Empreendimentos novamente para sair
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataBase"]', 'input' : datetime.now().strftime("%d%m%Y") }})  # escreve a data de inicio padrao 01/01/2015
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="parametrosReport"]/div[4]/div/div[2]/div/button'}}) # clica em Tipo Parcela
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="parametrosReport"]/div[4]/div/div[2]/div/ul/li[2]/a/label/input'}}) # clica em Todos
@@ -180,6 +185,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.coletar_id_relatorio, 'kargs' : {'target' : '//*[@id="result-table"]/tbody/tr[1]/td[1]'}}) #  # salva o numero do relatorio gerado em uma instancia global self.relatorios_id
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.finalizar_relatorio, 'kargs' : {'target' : '//*[@id="Content"]/section/div[2]/div[1]/div[1]/div'}}) # verifica para encerrar esté roteiro)
                 
                 
                 # para gerar o relatorio 'Relação de Clientes'
@@ -194,6 +200,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.coletar_id_relatorio, 'kargs' : {'target' : '//*[@id="result-table"]/tbody/tr[1]/td[1]'}}) #  # salva o numero do relatorio gerado em uma instancia global self.relatorios_id
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.finalizar_relatorio, 'kargs' : {'target' : '//*[@id="Content"]/section/div[2]/div[1]/div[1]/div'}}) # verifica para encerrar esté roteiro)
                 
                 
                 # para gerar o relatorio 'Cadastro de Datas'
@@ -211,6 +218,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.coletar_id_relatorio, 'kargs' : {'target' : '//*[@id="result-table"]/tbody/tr[1]/td[1]'}}) #  # salva o numero do relatorio gerado em uma instancia global self.relatorios_id
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.finalizar_relatorio, 'kargs' : {'target' : '//*[@id="Content"]/section/div[2]/div[1]/div[1]/div'}}) # verifica para encerrar esté roteiro)
                 
                 
                 # para gerar o relatorio 'Recebimentos Compensados'
@@ -221,15 +229,18 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataInicio"]', 'input' : "01012020"}})  # escreve a data de inicio padrao 01/01/2015
                     self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataFim"]', 'input' : datetime.now().strftime("%d%m%Y") }})  # escreve a data de fim padrao com a data atual mais 25 anos
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/button'}}) # clica em Empreendimentos
-                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label'}}) # clica em todos
-                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/button'}}) # clica em Empreendimentos
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="GerarRelatorio"]'}}) # clica em gerar relatorio
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.coletar_id_relatorio, 'kargs' : {'target' : '//*[@id="result-table"]/tbody/tr[1]/td[1]'}}) #  # salva o numero do relatorio gerado em uma instancia global self.relatorios_id
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.finalizar_relatorio, 'kargs' : {'target' : '//*[@id="Content"]/section/div[2]/div[1]/div[1]/div'}}) # verifica para encerrar esté roteiro)
                 
                 
                 # para gerar o relatorio 'Controle de Estoque'
@@ -249,6 +260,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.coletar_id_relatorio, 'kargs' : {'target' : '//*[@id="result-table"]/tbody/tr[1]/td[1]'}}) #  # salva o numero do relatorio gerado em uma instancia global self.relatorios_id
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.finalizar_relatorio, 'kargs' : {'target' : '//*[@id="Content"]/section/div[2]/div[1]/div[1]/div'}}) # verifica para encerrar esté roteiro)
                 
                 
                 self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 3}})  # colocar uma espera                
@@ -373,7 +385,7 @@ class BotExtractionImobme():
                 else:
                     sleep(1)
             
-            #sleep(60)
+            sleep(2)
             texto_error = "relatorios: " + str(self.relatorios) + "; foram baixados e salvos no diretorio " + str(self.caminho_download)
             self.__registro_error.record(texto_error, tipo="Concluido")
             
@@ -403,14 +415,14 @@ class BotExtractionImobme():
                 elif eventos == "emergencia":
                     print("saida de Emergencia")
                     self.__registro_error.record(f"saida emergencia acionada;{evento['kargs']}")
-                    sys.exit()
+                    raise TimeoutError(f"saida emergencia acionada;{evento['kargs']}")
             
             if contador <= emergency_break:
                 contador += 1
             else:
                 print("saida de Emergencia")
                 self.__registro_error.record("Exedeu o tempo limite do Emergency_break")
-                sys.exit()
+                raise TimeoutError("Exedeu o tempo limite do Emergency_break")
             sleep(1)
 
     def clicar(self, argumentos):
@@ -449,6 +461,20 @@ class BotExtractionImobme():
         except:
             if argumentos['exist'] == False:
                 return "saida"
+                
+    def finalizar_relatorio(self, argumentos):
+        '''
+        explicando o termo "exist"
+        True: ele vai finalizar a execução se o target for encontrado
+        False: ele vai finalizar a execução caso não encontre mais o target 
+        '''
+        try:
+            if self.navegador.find_element(By.XPATH, argumentos['target']).text != '':
+                raise UnboundLocalError("error ao gerar relatorio")
+        except UnboundLocalError:
+            raise UnboundLocalError("error ao gerar relatorio")
+        except:
+            pass
     
     def finalizador_de_emergencia(self, argumentos):
         try:
