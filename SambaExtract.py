@@ -20,15 +20,11 @@ if __name__ == "__main__":
     for x in range(3):
         try:
             bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
-            conversor = ImobmeExceltoConvert()
 
             bot_relatorio.obter_relatorios(["imobme_controle_vendas", "imobme_contratos_rescindidos"])
 
-            arquivos = []
-            for files in os.listdir(down_path):
-                arquivos.append(down_path + files)
 
-            final = conversor.tratar_arquivos(arquivos, path_data="dados_samba", copyto=f'C:\\Users\\{getuser()}\\OneLake - Microsoft\\DW_BI\\lake_house.Lakehouse\\Files\\jsons\\VendasContratos\\')
+            final = ImobmeExceltoConvert(path=down_path).extract_json(f'C:\\Users\\{getuser()}\\OneLake - Microsoft\\DW_BI\\lake_house.Lakehouse\\Files\\jsons\\VendasContratos\\')
             if final:
                 break
         except Exception as error:
@@ -37,6 +33,5 @@ if __name__ == "__main__":
             try:
                 bot_relatorio.navegador.close()
                 del bot_relatorio
-                del conversor
             except:
                 pass

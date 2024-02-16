@@ -18,7 +18,6 @@ if __name__ == "__main__":
     down_path = f"{os.getcwd()}\\downloads_IntegracaoWeb\\"
              
     bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
-    conversor = ImobmeExceltoConvert()
 
     bot_relatorio.obter_relatorios(["imobme_dados_contrato", "imobme_empreendimento"])
 
@@ -26,10 +25,10 @@ if __name__ == "__main__":
     for files in os.listdir(down_path):
        arquivos.append(down_path + files)
 
-    caminho_temp = "temp_IntegracaoWeb"
+    caminho_temp = f"{os.getcwd()}\\temp_IntegracaoWeb"
     if not os.path.exists(caminho_temp):
        os.makedirs(caminho_temp)
-    conversor.tratar_arquivos(arquivos, path_data="dados_IntegracaoWeb", tipo="csv_integra_web", copyto=caminho_temp)
+    ImobmeExceltoConvert(path=down_path).extract_csv_integraWeb(caminho_temp):
 
     arquivos_do_temp = []
     for arqui in os.listdir(caminho_temp):

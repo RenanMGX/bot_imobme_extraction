@@ -281,10 +281,11 @@ class BotExtractionImobme():
         if not os.path.exists(self.caminho_download):
             os.mkdir(self.caminho_download)
         else:
-            arquivos = os.listdir(self.caminho_download)
-            for arquivo in arquivos:
-                arquivo = self.caminho_download + arquivo
-                os.unlink(arquivo)
+            for arquivo in os.listdir(self.caminho_download):
+                try:
+                    os.unlink(self.caminho_download + arquivo)
+                except:
+                    pass
         
         prefs = {"download.default_directory" : self.caminho_download}
         
