@@ -59,8 +59,8 @@ def variables(f):
     return decorador
 
 @variables
-def load_page():
-    with open("page_html/index.html", 'r', encoding="utf-8")as _file:
+def load_page(page="page_html/index.html"):
+    with open(page, 'r', encoding="utf-8")as _file:
         page = _file.read()
     return page
     
@@ -81,7 +81,7 @@ async def upload(request: Request, file:  UploadFile = File(...)):
     if conteudo:
         tratar_arquivo_int(conteudo ,cotyto=f"\\\\server008\\G\\ARQ_PATRIMAR\\WORK\\TI - RPA\\API SGA\\{datetime.now().strftime('%d-%m-%Y_IntComercial.csv')}")
     
-    return load_page()
+    return load_page("page_html/up.html")
 
 
 if __name__ == "__main__":
