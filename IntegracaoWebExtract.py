@@ -28,7 +28,7 @@ if __name__ == "__main__":
     caminho_temp = f"{os.getcwd()}\\temp_IntegracaoWeb"
     if not os.path.exists(caminho_temp):
        os.makedirs(caminho_temp)
-    ImobmeExceltoConvert(path=down_path).extract_csv_integraWeb(caminho_temp):
+    ImobmeExceltoConvert(path=down_path).extract_csv_integraWeb(caminho_temp)
 
     arquivos_do_temp = []
     for arqui in os.listdir(caminho_temp):
