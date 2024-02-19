@@ -73,7 +73,7 @@ class BotExtractionImobme():
                 relatorio = str(relatorio)
 
                 # para gerar o 'Relatorios de Empreendimento'
-                if (relatorio.lower() == "imobme_empreendimento") or (relatorio.lower() == "empreendimentos"):
+                if (relatorio.lower() == "imobme_empreendimento"):
                     verificar_se_tem_relatorios += 1
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
@@ -91,7 +91,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.coletar_id_relatorio, 'kargs' : {'target' : '//*[@id="result-table"]/tbody/tr[1]/td[1]'}}) #  # salva o numero do relatorio gerado em uma instancia global self.relatorios_id
                 
                 # para gerar o relatorio 'Contole de Vendas'
-                elif (relatorio.lower() == "imobme_controle_vendas") or (relatorio.lower() == "vendas"):
+                elif (relatorio.lower() == "imobme_controle_vendas"):
                     verificar_se_tem_relatorios += 1
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
@@ -114,7 +114,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                 
                 # para gerar o relatorio 'Contole de Vendas' com range de 90 dias
-                elif (relatorio.lower() == "imobme_controle_vendas_90_dias") or (relatorio.lower() == "vendas"):
+                elif (relatorio.lower() == "imobme_controle_vendas_90_dias"):
                     verificar_se_tem_relatorios += 1
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
@@ -137,7 +137,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                 
                 # para gerar o relatorio 'Contrator Rescindidos'
-                elif (relatorio.lower() == "imobme_contratos_rescindidos") or (relatorio.lower() == "contratosrescindidos"):
+                elif (relatorio.lower() == "imobme_contratos_rescindidos"):
                     verificar_se_tem_relatorios += 1
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
@@ -162,7 +162,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                 
                 # para gerar o relatorio 'Contrator Rescindidos' com range de 90 dias
-                elif (relatorio.lower() == "imobme_contratos_rescindidos_90_dias") or (relatorio.lower() == "contratosrescindidos"):
+                elif (relatorio.lower() == "imobme_contratos_rescindidos_90_dias"):
                     verificar_se_tem_relatorios += 1
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
@@ -187,7 +187,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                 
                 # para gerar o relatorio 'Dados do Contrato'
-                elif (relatorio.lower() == "imobme_dados_contrato") or (relatorio.lower() == "dadoscontrato"):
+                elif (relatorio.lower() == "imobme_dados_contrato"):
                     verificar_se_tem_relatorios += 1
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
@@ -216,7 +216,7 @@ class BotExtractionImobme():
                 
                 
                 # para gerar o relatorio 'Previsão de Receita'
-                elif (relatorio.lower() == "imobme_previsao_receita") or (relatorio.lower() == "previsaoreceita"):
+                elif (relatorio.lower() == "imobme_previsao_receita"):
                     verificar_se_tem_relatorios += 1
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
@@ -244,7 +244,7 @@ class BotExtractionImobme():
                 
                 
                 # para gerar o relatorio 'Relação de Clientes'
-                elif (relatorio.lower() == "imobme_relacao_clientes") or (relatorio.lower() == "relacaoclientes"):
+                elif (relatorio.lower() == "imobme_relacao_clientes"):
                     verificar_se_tem_relatorios += 1
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
@@ -259,14 +259,30 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.finalizar_relatorio, 'kargs' : {'target' : '//*[@id="Content"]/section/div[2]/div[1]/div[1]/div'}}) # verifica para encerrar esté roteiro)
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                 
-                # para gerar o relatorio 'Relação de Clientes' com range de 90 Dias
-                elif (relatorio.lower() == "imobme_relacao_clientes_90_dias") or (relatorio.lower() == "relacaoclientes"):
+                # para gerar o relatorio 'Relação de Clientes' X clientes
+                elif (relatorio.lower() == "imobme_relacao_clientes_x_clientes"):
                     verificar_se_tem_relatorios += 1
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn_o_9"]'}}) # clique em IMOBME - Relação de Clientes
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
-                    self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataInicio"]', 'input' : (datetime.now() - relativedelta(days=90)).strftime("%d%m%Y")}})  # escreve a data de inicio padrao 01/01/2015
+                    self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="tipoReportCliente_chzn"]'}}) # clica em tipo de relatorio
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="tipoReportCliente_chzn_o_1"]'}}) # clica em clientes x contratos
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvTipoContrato"]/div/button'}}) # clica em tipo de contrato
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvTipoContrato"]/div/ul/li[2]/a/label/input'}}) # clica em todos
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvTipoContrato"]/div/button'}}) # clica em tipo de contrato
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/button'}}) # clica em empreendimentos
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label/input'}}) # clica em todos
+                    self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 1}})  # colocar uma espera
+                    self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="dvEmpreendimento"]/div[1]/div/div/button'}}) # clica em empreendimentos
+                    
+                    self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataInicio"]', 'input' : "01012015"}})  # escreve a data de inicio padrao 01/01/2015
                     self.gerar_relatorios.append({'action' : self.escrever, 'kargs' : {'target' : '//*[@id="DataFim"]', 'input' : datetime.now().strftime("%d%m%Y") }})  # escreve a data de fim padrao com a data atual mais 25 anos
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="GerarRelatorio"]'}}) # clica em gerar relatorio
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
@@ -276,7 +292,7 @@ class BotExtractionImobme():
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                 
                 # para gerar o relatorio 'Cadastro de Datas'
-                elif (relatorio.lower() == "imobme_cadastro_datas") or (relatorio.lower() == "cadastrodatas"):
+                elif (relatorio.lower() == "imobme_cadastro_datas"):
                     verificar_se_tem_relatorios += 1
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
@@ -296,7 +312,7 @@ class BotExtractionImobme():
                 
                 
                 # para gerar o relatorio 'Recebimentos Compensados'
-                elif (relatorio.lower() == "recebimentos_compensados") or (relatorio.lower() == "recebimentoscompensados"):
+                elif (relatorio.lower() == "recebimentos_compensados"):
                     verificar_se_tem_relatorios += 1
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
@@ -320,7 +336,7 @@ class BotExtractionImobme():
                 
                 
                 # para gerar o relatorio 'Controle de Estoque'
-                elif (relatorio.lower() == "imobme_controle_estoque") or (relatorio.lower() == "controleestoque"):
+                elif (relatorio.lower() == "imobme_controle_estoque"):
                     verificar_se_tem_relatorios += 1
                     self.gerar_relatorios.append({'action' : self.esperar, 'kargs' : {'segundos' : 2}})  # colocar uma espera
                     self.gerar_relatorios.append({'action' : self.clicar, 'kargs' : {'target' : '//*[@id="Relatorios_chzn"]/a'}}) # clique em selecionar Relatorios
@@ -599,7 +615,7 @@ if __name__ == "__main__":
 
 
     bot = BotExtractionImobme(usuario=creden['usuario'],senha=creden['senha'],caminho_download=f"{os.getcwd()}\\downloads_samba\\")
-    arquivos = bot.obter_relatorios(["imobme_controle_estoque"])
+    arquivos = bot.obter_relatorios(["imobme_relacao_clientes_x_clientes"])
     #     #arquivos = bot.obter_relatorios(["imobme_controle_vendas", "imobme_contratos_rescindidos"])
     #     #arquivos = bot.obter_relatorios(["imobme_empreendimento"])
     #     bot.obter_relatorios(["imobme_contratos_rescindidos"])
