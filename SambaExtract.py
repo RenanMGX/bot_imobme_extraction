@@ -6,12 +6,12 @@ from Entities.credential.carregar_credenciais import Credential
 import os
 from getpass import getuser
 from Entities.registro.registro import Registro
+import traceback
 
 if __name__ == "__main__":
     reg = Registro("SambaExtract.py")
 
-    crendential = Credential()
-    entrada = crendential.credencial()
+    entrada: dict = Credential().credencial()
     if (entrada['usuario'] == None) or (entrada['senha'] == None):
         raise PermissionError("Credenciais Invalidas")
 
@@ -19,14 +19,16 @@ if __name__ == "__main__":
 
     for x in range(3):
         try:
-            bot_relatorio = BotExtractionImobme(usuario=entrada['usuario'],senha=entrada['senha'],caminho_download=down_path)
+            bot_relatorio = BotExtractionImobme(user=entrada['usuario'],password=entrada['senha'],download_path=down_path)
 
-            bot_relatorio.obter_relatorios(["imobme_controle_vendas_90_dias", "imobme_contratos_rescindidos_90_dias", "imobme_relacao_clientes_x_clientes"])
+            bot_relatorio.start(["imobme_controle_vendas_90_dias", "imobme_contratos_rescindidos_90_dias", "imobme_relacao_clientes_x_clientes"])
 
             final = ImobmeExceltoConvert(path=down_path).extract_json(f'C:\\Users\\{getuser()}\\OneLake - Microsoft\\DW_BI\\lake_house.Lakehouse\\Files\\jsons\\VendasContratos\\')
             if final:
+                bot_relatorio.navegador.close()
                 break
         except Exception as error:
+            print(traceback.format_exc())
             reg.record(f"{type(error)};{error}")
         finally:
             try:
