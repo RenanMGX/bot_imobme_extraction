@@ -338,10 +338,9 @@ class BotExtractionImobme():
                                     tag_a.send_keys(Keys.ENTER)
                                     relatories_id.pop(relatories_id.index(id))
             except:
-                sleep(1)
+                sleep(5)
                 continue
             
-            sleep(5)
             _find_element(self.navegador, By.ID, 'btnProximaDefinicao').click()
             sleep(5)
         

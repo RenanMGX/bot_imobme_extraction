@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
         down_path = f"{os.getcwd()}\\downloads_financeiro\\"
 
-        for x in range(1):
+        for x in range(3):
             try:   
                 bot_relatorio = BotExtractionImobme(user=entrada['usuario'],password=entrada['senha'],download_path=down_path)
                 
