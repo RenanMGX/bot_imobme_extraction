@@ -61,7 +61,7 @@ class ImobmeExceltoConvert():
             
         return files_dict
     
-    def extract_json(self, copyto:str) -> None:
+    def extract_json(self, copyto:str) -> bool:
         """salva os dados do dataframe em um arquivo json
 
         Args:
@@ -78,7 +78,7 @@ class ImobmeExceltoConvert():
                 
         return True
                 
-    def extract_csv(self, copyto:str) -> None:
+    def extract_csv(self, copyto:str) -> bool:
         """salva os dados do dataframe em um arquivo csv
 
         Args:
@@ -93,7 +93,7 @@ class ImobmeExceltoConvert():
             
         return True
 
-    def extract_csv_integraWeb(self, copyto:str) -> None:
+    def extract_csv_integraWeb(self, copyto:str) -> bool:
         """funciona do mesmo jeito que o self.extract_csv porem contem algumas regras de tratativas de dados
 
         Args:

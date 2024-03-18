@@ -86,7 +86,7 @@ class BotExtractionImobme():
             if (relatorie:="imobme_empreendimento") == rel:
                 try:
                     _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
-                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_7"]').click() # clique em IMOBME - Empreendimento
+                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_8"]').click() # clique em IMOBME - Empreendimento
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clique em selecionar Emprendimentos
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label/input').click() # clique em selecionar todos os empreendimentos
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clique em selecionar Emprendimentos novamente para sair
@@ -101,7 +101,7 @@ class BotExtractionImobme():
             elif (relatorie:="imobme_controle_vendas") == rel:
                 try:
                     _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
-                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_5"]').click() # clique em IMOBME - Contre de Vendas
+                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_6"]').click() # clique em IMOBME - Contre de Vendas
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataInicio"]').send_keys("01012015") # escreve a data de inicio padrao 01/01/2015
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataFim"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data hoje
                     _find_element(self.navegador, By.XPATH, '//*[@id="TipoDataSelecionada_chzn"]/a').click() # clique em Tipo Data
@@ -120,7 +120,7 @@ class BotExtractionImobme():
             elif (relatorie:="imobme_controle_vendas_90_dias") == rel:
                 try:
                     _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
-                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_5"]').click() # clique em IMOBME - Contre de Vendas
+                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_6"]').click() # clique em IMOBME - Contre de Vendas
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataInicio"]').send_keys((datetime.now() - relativedelta(days=90)).strftime("%d%m%Y")) # escreve a data de inicio com um range de 90 dias
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataFim"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data hoje
                     _find_element(self.navegador, By.XPATH, '//*[@id="TipoDataSelecionada_chzn"]/a').click() # clique em Tipo Data
@@ -139,7 +139,7 @@ class BotExtractionImobme():
             elif (relatorie:="imobme_contratos_rescindidos") == rel:
                 try:
                     _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
-                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_3"]').click()  # clique em IMOBME - Contratos Rescindicos
+                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_4"]').click()  # clique em IMOBME - Contratos Rescindicos
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataInicio"]').send_keys("01012015") # escreve a data de inicio padrao 01/01/2015
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataFim"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data hoje
                     _find_element(self.navegador, By.XPATH, '//*[@id="parametrosReport"]/div[2]/div/div[3]/div/button').click()  # clique em Tipo de Contrato
@@ -159,7 +159,7 @@ class BotExtractionImobme():
             elif (relatorie:="imobme_contratos_rescindidos_90_dias") == rel:
                 try:
                     _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
-                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_3"]').click()  # clique em IMOBME - Contratos Rescindicos
+                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_4"]').click()  # clique em IMOBME - Contratos Rescindicos
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataInicio"]').send_keys((datetime.now() - relativedelta(days=90)).strftime("%d%m%Y")) # escreve a data de inicio padrao 01/01/2015
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataFim"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data hoje
                     _find_element(self.navegador, By.XPATH, '//*[@id="parametrosReport"]/div[2]/div/div[3]/div/button').click()  # clique em Tipo de Contrato
@@ -179,7 +179,7 @@ class BotExtractionImobme():
             elif (relatorie:="imobme_dados_contrato") == rel:
                 try:
                     _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
-                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_6"]').click() # clique em IMOBME - Dados de Contrato
+                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_7"]').click() # clique em IMOBME - Dados de Contrato
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label').click() # clica em todos
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
@@ -200,7 +200,7 @@ class BotExtractionImobme():
             elif (relatorie:="imobme_previsao_receita") == rel:
                 try:
                     _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
-                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_8"]').click() # clique em IMOBME - Previsão de Receita
+                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_9"]').click() # clique em IMOBME - Previsão de Receita
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataInicio"]').send_keys("01012015") # escreve a data de inicio padrao 01/01/2015
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataFim"]').send_keys((datetime.now() + relativedelta(years=25)).strftime("%d%m%Y")) # escreve a data de fim padrao com a data atual mais 25 anos
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
@@ -221,7 +221,7 @@ class BotExtractionImobme():
             elif (relatorie:="imobme_relacao_clientes") == rel:
                 try:
                     _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
-                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_9"]').click() # clique em IMOBME - Relação de Clientes
+                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_10"]').click() # clique em IMOBME - Relação de Clientes
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataInicio"]').send_keys("01012015") # escreve a data de inicio padrao 01/01/2015
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataFim"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data de hoje
                     
@@ -235,7 +235,7 @@ class BotExtractionImobme():
             elif (relatorie:="imobme_relacao_clientes_x_clientes") == rel:
                 try:
                     _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
-                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_9"]').click() # clique em IMOBME - Relação de Clientes
+                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_10"]').click() # clique em IMOBME - Relação de Clientes
                     _find_element(self.navegador, By.XPATH, '//*[@id="tipoReportCliente_chzn"]').click() # clica em tipo de relatorio
                     _find_element(self.navegador, By.XPATH, '//*[@id="tipoReportCliente_chzn_o_1"]').click() # clica em clientes x contratos
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvTipoContrato"]/div/button').click() # clica em tipo de contrato
@@ -257,7 +257,7 @@ class BotExtractionImobme():
             elif (relatorie:="imobme_cadastro_datas") == rel:
                 try:
                     _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
-                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_2"]').click()  # clique em IMOBME - Previsão de Receita
+                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_3"]').click()  # clique em IMOBME - Cadastro de Datas
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label').click() # clica em todos
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
@@ -272,7 +272,7 @@ class BotExtractionImobme():
             elif (relatorie:="recebimentos_compensados") == rel:
                 try:
                     _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
-                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_15"]').click()  # clique em IMOBME - Previsão de Receita
+                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_16"]').click()  # clique em Recebimentos Compensados
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataInicio"]').send_keys("01012020") # escreve a data de inicio padrao 01/01/2020
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataFim"]').send_keys(datetime.now().strftime(datetime.now().strftime("%d%m%Y"))) # escreve a data de hoje
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
@@ -289,7 +289,7 @@ class BotExtractionImobme():
             elif (relatorie:="imobme_controle_estoque") == rel:
                 try:
                     _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
-                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_4"]').click() # clique em IMOBME - Controle de Estoque
+                    _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_5"]').click() # clique em IMOBME - Controle de Estoque
                     _find_element(self.navegador, By.XPATH, '//*[@id="parametrosReport"]/div[2]/div[1]/div/div/button').click() # clica em Empreendimentos
                     _find_element(self.navegador, By.XPATH, '//*[@id="parametrosReport"]/div[2]/div[1]/div/div/ul/li[2]/a/label/input').click() # clica em todos
                     _find_element(self.navegador, By.XPATH, '//*[@id="parametrosReport"]/div[2]/div[1]/div/div/button').click() # clica em Empreendimentos novamente para sair
