@@ -23,13 +23,15 @@ if __name__ == "__main__":
 
             bot_relatorio.start(["imobme_controle_vendas_90_dias", "imobme_contratos_rescindidos_90_dias", "imobme_relacao_clientes_x_clientes"])
 
-            final = ImobmeExceltoConvert(path=down_path).extract_json(f'C:\\Users\\{getuser()}\\OneLake - Microsoft\\DW_BI\\lake_house.Lakehouse\\Files\\jsons\\VendasContratos\\')
+            final = ImobmeExceltoConvert(path=down_path).extract_json(f'C:\\Users\\{getuser()}\\OneLake - Microsoft\\BI_HML\\lake_house.Lakehouse\\Files\\jsons\\VendasContratos\\')
             if final:
                 bot_relatorio.navegador.close()
                 break
         except Exception as error:
-            print(traceback.format_exc())
-            reg.record(f"{type(error)};{error}")
+                erro_trace = traceback.format_exc()
+                print(erro_trace)
+                erro_trace = erro_trace.replace("\n", "|||")
+                reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
         finally:
             try:
                 bot_relatorio.navegador.close()

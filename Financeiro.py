@@ -8,7 +8,7 @@ from datetime import datetime
 import traceback
 
 if __name__ == "__main__":
-    reg = Registro(__file__)
+    reg = Registro("Financeiro")
     tempo_agora = datetime.now()
     try:
         
@@ -35,8 +35,10 @@ if __name__ == "__main__":
                 if final:
                     break
             except Exception as error:
-                print(traceback.format_exc())
-                reg.record(f"{type(error)};{error}")
+                erro_trace = traceback.format_exc()
+                print(erro_trace)
+                erro_trace = erro_trace.replace("\n", "|||")
+                reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
             finally:
                 try:
                     bot_relatorio.navegador.close()
@@ -54,8 +56,10 @@ if __name__ == "__main__":
                 if final:
                     break
             except Exception as error:
-                print(traceback.format_exc())
-                reg.record(f"{type(error)};{error}")
+                erro_trace = traceback.format_exc()
+                print(erro_trace)
+                erro_trace = erro_trace.replace("\n", "|||")
+                reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
             finally:
                 try:
                     bot_relatorio.navegador.close()
@@ -74,8 +78,10 @@ if __name__ == "__main__":
                 if final:
                     break
             except Exception as error:
-                print(traceback.format_exc())
-                reg.record(f"{type(error)};{error}")
+                erro_trace = traceback.format_exc()
+                print(erro_trace)
+                erro_trace = erro_trace.replace("\n", "|||")
+                reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
             finally:
                 try:
                     bot_relatorio.navegador.close()
@@ -84,6 +90,7 @@ if __name__ == "__main__":
                     pass
 
     except Exception as error:
-        reg.record(f"{type(error)};{error}")
+        erro_trace = traceback.format_exc().replace("\n", "|||")
+        reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
     
     print(datetime.now() - tempo_agora)
