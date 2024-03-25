@@ -50,7 +50,9 @@ if __name__ == "__main__":
                 bot_relatorio = BotExtractionImobme(user=entrada['usuario'],password=entrada['senha'],download_path=down_path)
                 
                 bot_relatorio.start([
-                    "recebimentos_compensados"
+                    "recebimentos_compensados",
+                    "imobme_relacao_clientes_x_clientes",
+                    "imobme_previsao_receita"
                 ])
                 final = ImobmeExceltoConvert(path=down_path).extract_json(f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\')
                 if final:
@@ -67,28 +69,6 @@ if __name__ == "__main__":
                 except:
                     pass
                 
-        for x in range(5):
-            try:
-                bot_relatorio = BotExtractionImobme(user=entrada['usuario'],password=entrada['senha'],download_path=down_path)
-                
-                bot_relatorio.start([
-                    "imobme_previsao_receita",
-                ])
-                final = ImobmeExceltoConvert(path=down_path).extract_json(f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\')
-                if final:
-                    break
-            except Exception as error:
-                erro_trace = traceback.format_exc()
-                print(erro_trace)
-                erro_trace = erro_trace.replace("\n", "|||")
-                reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
-            finally:
-                try:
-                    bot_relatorio.navegador.close()
-                    del bot_relatorio
-                except:
-                    pass
-
     except Exception as error:
         erro_trace = traceback.format_exc().replace("\n", "|||")
         reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
