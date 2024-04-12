@@ -14,14 +14,14 @@ try:
 except ModuleNotFoundError:
     from registro.registro import Registro # type: ignore
 
-def _find_element(browser: webdriver.Chrome, mod, target:str, timeout:int=10, can_pass:bool=False):
-    for _ in range(timeout):
+def _find_element(browser: webdriver.Chrome, mod, target:str, timeout:int=15, can_pass:bool=False):
+    for _ in range(timeout*4):
         try:
             obj = browser.find_element(mod, target)
             print(target)
             return obj
         except:
-            sleep(1)
+            sleep(0.25)
     
     if can_pass:
         print(f"{can_pass=}")
@@ -274,7 +274,7 @@ class BotExtractionImobme():
                     _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
                     _find_element(self.navegador, By.XPATH, '//*[@id="Relatorios_chzn_o_16"]').click()  # clique em Recebimentos Compensados
                     _find_element(self.navegador, By.XPATH, '//*[@id="DataInicio"]').send_keys("01012020") # escreve a data de inicio padrao 01/01/2020
-                    _find_element(self.navegador, By.XPATH, '//*[@id="DataFim"]').send_keys(datetime.now().strftime(datetime.now().strftime("%d%m%Y"))) # escreve a data de hoje
+                    _find_element(self.navegador, By.XPATH, '//*[@id="DataFim"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data de hoje
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label').click() # clica em todos
                     _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
@@ -370,7 +370,7 @@ if __name__ == "__main__":
 
 
     bot:BotExtractionImobme = BotExtractionImobme(user=creden['usuario'],password=creden['senha'],download_path=f"{os.getcwd()}\\downloads_samba\\")
-    bot.start(["imobme_empreendimento"])
+    bot.start(["recebimentos_compensados"])
     bot.navegador.close()
     
     #arquivos = bot.obter_relatorios(["imobme_relacao_clientes_x_clientes"])
