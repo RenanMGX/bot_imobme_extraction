@@ -51,9 +51,11 @@ class BotExtractionImobme():
         
         self.navegador: webdriver.Chrome = webdriver.Chrome(options=chrome_options)
         self.navegador.get("http://patrimarengenharia.imobme.com/Autenticacao/Login")
+        self.navegador.maximize_window()
         
     def _login(self) -> None:
         self.navegador.get("http://patrimarengenharia.imobme.com/Autenticacao/Login")
+        self.navegador.maximize_window()
         
         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="login"]').send_keys(self.__user)
         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="password"]').send_keys(self.__password)
@@ -81,6 +83,7 @@ class BotExtractionImobme():
         self.relatories_id: dict = {}
         
         self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
+        self.navegador.maximize_window()
         
         for rel in relatories:
             if (relatorie:="imobme_empreendimento") == rel:

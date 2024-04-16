@@ -18,6 +18,7 @@ if __name__ == "__main__":
 
         down_path = f"{os.getcwd()}\\downloads_financeiro\\"
 
+        #primeira parte
         for x in range(3):
             try:   
                 bot_relatorio = BotExtractionImobme(user=entrada['usuario'],password=entrada['senha'],download_path=down_path)
@@ -45,6 +46,10 @@ if __name__ == "__main__":
                     del bot_relatorio
                 except:
                     continue
+        #fim primeira parte        
+         
+         
+        #segunda parte        
         for x in range(5):
             try:
                 bot_relatorio = BotExtractionImobme(user=entrada['usuario'],password=entrada['senha'],download_path=down_path)
@@ -67,6 +72,7 @@ if __name__ == "__main__":
                     del bot_relatorio
                 except:
                     pass
+        #fim segunda parte
                 
     except Exception as error:
         erro_trace = traceback.format_exc().replace("\n", "|||")
