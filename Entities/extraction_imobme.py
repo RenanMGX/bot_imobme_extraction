@@ -221,8 +221,7 @@ class BotExtractionImobme():
                         _find_element(self.navegador, By.XPATH, '//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
                         _find_element(self.navegador, By.XPATH, '//*[@id="parametrosReport"]/div[1]/div').click() # clica fora
                         _find_element(self.navegador, By.XPATH, '//*[@id="parametrosReport"]/div[3]/div[1]/div/button').click() # clica em tipos de contrato
-                        _find_element(self.navegador, By.XPATH, '//*[@id="parametrosReport"]/div[3]/div[1]/div/ul/li[3]/a/label').click() # clica em PCV
-                        _find_element(self.navegador, By.XPATH, '//*[@id="parametrosReport"]/div[3]/div[1]/div/ul/li[5]/a/label').click() # clica em Cessao
+                        _find_element(self.navegador, By.XPATH, '//*[@id="parametrosReport"]/div[3]/div[1]/div/ul/li[2]/a/label/input').click() # clica em Todos
                         _find_element(self.navegador, By.XPATH, '//*[@id="parametrosReport"]/div[1]/div').click() # clica fora
                         _find_element(self.navegador, By.XPATH, '//*[@id="DataBase"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data hoje
                         
