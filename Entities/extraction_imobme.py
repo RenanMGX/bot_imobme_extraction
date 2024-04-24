@@ -128,6 +128,7 @@ class BotExtractionImobme():
                         finalizou = True
                         break
                     except:
+                        self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
                         self.__registro_error.record(f"erro ao gerar {relatorie=}")
                         sleep(1)
                 if not finalizou:
@@ -153,6 +154,7 @@ class BotExtractionImobme():
                         finalizou = True
                         break
                     except:
+                        self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
                         self.__registro_error.record(f"erro ao gerar {relatorie=}")
                         sleep(1)
                 if not finalizou:
@@ -179,6 +181,7 @@ class BotExtractionImobme():
                         finalizou = True
                         break
                     except:
+                        self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
                         self.__registro_error.record(f"erro ao gerar {relatorie=}")
                         sleep(1)
                 if not finalizou:
@@ -205,6 +208,7 @@ class BotExtractionImobme():
                         finalizou = True
                         break
                     except:
+                        self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
                         self.__registro_error.record(f"erro ao gerar {relatorie=}")
                         sleep(1)
                 if not finalizou:
@@ -232,6 +236,7 @@ class BotExtractionImobme():
                         break
 
                     except:
+                        self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
                         self.__registro_error.record(f"erro ao gerar {relatorie=}")
                         sleep(1)
                 if not finalizou:
@@ -260,6 +265,7 @@ class BotExtractionImobme():
                         break
 
                     except:
+                        self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
                         self.__registro_error.record(f"erro ao gerar {relatorie=}")
                         sleep(1)
                 if not finalizou:
@@ -281,6 +287,7 @@ class BotExtractionImobme():
                         break
 
                     except:
+                        self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
                         self.__registro_error.record(f"erro ao gerar {relatorie=}")
                         sleep(1)
                 if not finalizou:
@@ -310,6 +317,7 @@ class BotExtractionImobme():
                         break
 
                     except:
+                        self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
                         self.__registro_error.record(f"erro ao gerar {relatorie=}")
                         sleep(1)
                 if not finalizou:
@@ -332,6 +340,7 @@ class BotExtractionImobme():
                         break
 
                     except:
+                        self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
                         self.__registro_error.record(f"erro ao gerar {relatorie=}")
                         sleep(1)
                 if not finalizou:
@@ -356,6 +365,7 @@ class BotExtractionImobme():
                         break
 
                     except:
+                        self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
                         self.__registro_error.record(f"erro ao gerar {relatorie=}")
                         sleep(1)
                 if not finalizou:
@@ -379,6 +389,7 @@ class BotExtractionImobme():
                         break
 
                     except:
+                        self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
                         self.__registro_error.record(f"erro ao gerar {relatorie=}")
                         sleep(1)
                 if not finalizou:
