@@ -38,7 +38,7 @@ if __name__ == "__main__":
             except Exception as error:
                 erro_trace = traceback.format_exc()
                 print(erro_trace)
-                erro_trace = erro_trace.replace("\n", "|||")
+                erro_trace = erro_trace.replace("\n", " <br> ")
                 reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
             finally:
                 try:
@@ -64,7 +64,7 @@ if __name__ == "__main__":
             except Exception as error:
                 erro_trace = traceback.format_exc()
                 print(erro_trace)
-                erro_trace = erro_trace.replace("\n", "|||")
+                erro_trace = erro_trace.replace("\n", " <br> ")
                 reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
             finally:
                 try:
@@ -75,7 +75,14 @@ if __name__ == "__main__":
         #fim segunda parte
                 
     except Exception as error:
-        erro_trace = traceback.format_exc().replace("\n", "|||")
+        erro_trace = traceback.format_exc().replace("\n", " <br> ")
         reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
+        path:str = "logs/"
+        if not os.path.exists(path):
+            os.makedirs(path)
+        file_name = path + f"LogError_{datetime.now().strftime('%d%m%Y%H%M%Y')}.txt"
+        with open(file_name, 'w', encoding='utf-8')as _file:
+            _file.write(traceback.format_exc())
+        raise error
     
     print(datetime.now() - tempo_agora)
