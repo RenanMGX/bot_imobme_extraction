@@ -6,6 +6,7 @@ from copy import deepcopy
 from time import sleep
 from typing import Dict
 from datetime import datetime
+import traceback
 
 class ImobmeExceltoConvert():
     def __init__(self, path:str) -> None:
@@ -38,7 +39,7 @@ class ImobmeExceltoConvert():
         return tuple(files_list)
         
     
-    def _extract_infor(self) -> Dict[str,pd.DataFrame]:
+    def _extract_infor(self) -> Dict[str,pd.DataFrame|None]:
         """lê os arquivos Excel e extrai em um dataframe os dados da segunda coluna de cada arquivo
 
         Returns:
@@ -46,18 +47,22 @@ class ImobmeExceltoConvert():
         """
         files_dict: dict = {}
         for file in self._verificFiles():
-            app = xw.App(visible=False)
-            with app.books.open(file) as wb:
-                if len(wb.sheet_names) > 1:
-                    sheet = wb.sheets[1]
-                else:
-                    app.kill()
-                    continue
-                
-                df = sheet['A1'].expand().options(pd.DataFrame, index=False, header=True).value
-                
-                files_dict[file] = df
-            app.kill()
+            try:
+                app = xw.App(visible=False)
+                with app.books.open(file) as wb:
+                    if len(wb.sheet_names) > 1:
+                        sheet = wb.sheets[1]
+                    else:
+                        app.kill()
+                        continue
+                    
+                    df = sheet['A1'].expand().options(pd.DataFrame, index=False, header=True).value
+                    
+                    files_dict[file] = df
+                app.kill()
+            except:
+                self.__error_log.record(traceback.format_exc(), 'Error')
+                files_dict[file] = None
             
         return files_dict
     
@@ -70,7 +75,11 @@ class ImobmeExceltoConvert():
         if copyto[-1] != "\\":
             copyto += "\\"
                     
+        #relacao:Dict[str,pd.DataFrame|None] = self._extract_infor()
+                    
         for path,df in self._extract_infor().items():
+            if df is None:
+                continue
             file_name = path.split('\\')[-1].split('_')[0]
             json_file = df.to_json(orient='records', date_format='iso')
             with open(((copyto + file_name) + ".json"), 'w')as _file:
@@ -88,6 +97,8 @@ class ImobmeExceltoConvert():
             copyto += "\\"
                     
         for path,df in self._extract_infor().items():
+            if df is None:
+                continue
             file_name = path.split('\\')[-1].split('_')[0]
             df.to_csv(((copyto + file_name) + ".csv") , sep=';', index=False, encoding='latin1', errors='ignore', decimal=',')
             
@@ -103,6 +114,8 @@ class ImobmeExceltoConvert():
             copyto += "\\"
                     
         for path,df in self._extract_infor().items():
+            if df is None:
+                continue
             file_name = path.split('\\')[-1].split('_')[0]
             
             if "Empreendimentos" in file_name:

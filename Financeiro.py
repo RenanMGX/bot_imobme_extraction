@@ -12,6 +12,8 @@ def error_except(error):
     print(erro_trace)
     erro_trace = erro_trace.replace("\n", " <br> ")
     reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
+    
+    
 
 if __name__ == "__main__":
     reg = Registro("Financeiro")
