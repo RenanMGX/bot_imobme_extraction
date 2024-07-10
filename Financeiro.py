@@ -7,6 +7,12 @@ from Entities.registro.registro import Registro
 from datetime import datetime
 import traceback
 
+def error_except(error):
+    erro_trace = traceback.format_exc()
+    print(erro_trace)
+    erro_trace = erro_trace.replace("\n", " <br> ")
+    reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
+
 if __name__ == "__main__":
     reg = Registro("Financeiro")
     tempo_agora = datetime.now()
@@ -19,7 +25,7 @@ if __name__ == "__main__":
         down_path = f"{os.getcwd()}\\downloads_financeiro\\"
 
         #primeira parte
-        for x in range(3):
+        for x in range(5):
             try:   
                 bot_relatorio = BotExtractionImobme(user=entrada['usuario'],password=entrada['senha'],download_path=down_path)
                 
@@ -32,14 +38,10 @@ if __name__ == "__main__":
                     "imobme_cadastro_datas",
                     "imobme_empreendimento"
                 ])
-                final = ImobmeExceltoConvert(path=down_path).extract_json(f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\')
-                if final:
-                    break
+                ImobmeExceltoConvert(path=down_path).extract_json(f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\')
+                break
             except Exception as error:
-                erro_trace = traceback.format_exc()
-                print(erro_trace)
-                erro_trace = erro_trace.replace("\n", " <br> ")
-                reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
+                error_except(error)
             finally:
                 try:
                     bot_relatorio.navegador.close()
@@ -62,10 +64,7 @@ if __name__ == "__main__":
                 ImobmeExceltoConvert(path=down_path).extract_json(f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\')
                 break
             except Exception as error:
-                erro_trace = traceback.format_exc()
-                print(erro_trace)
-                erro_trace = erro_trace.replace("\n", " <br> ")
-                reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
+                error_except(error)
             finally:
                 try:
                     bot_relatorio.navegador.close()
