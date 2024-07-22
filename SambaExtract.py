@@ -2,7 +2,7 @@ import sys
 sys.path.append("Entities")
 from Entities.tratar_arquivos_excel_imobme import ImobmeExceltoConvert
 from Entities.extraction_imobme import BotExtractionImobme
-from Entities.credential.carregar_credenciais import Credential
+from Entities.credenciais import Credential
 import os
 from getpass import getuser
 from Entities.registro.registro import Registro
@@ -13,15 +13,15 @@ if __name__ == "__main__":
     try:
         reg = Registro("SambaExtract.py")
 
-        entrada: dict = Credential().credencial()
-        if (entrada['usuario'] == None) or (entrada['senha'] == None):
+        entrada: dict = Credential('IMOBME_PRD').load()
+        if (entrada['login'] == None) or (entrada['password'] == None):
             raise PermissionError("Credenciais Invalidas")
 
         down_path = f"{os.getcwd()}\\downloads_samba\\"
 
         for x in range(3):
             try:
-                bot_relatorio = BotExtractionImobme(user=entrada['usuario'],password=entrada['senha'],download_path=down_path)
+                bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path)
 
                 bot_relatorio.start(["imobme_controle_vendas_90_dias", "imobme_contratos_rescindidos_90_dias", "imobme_relacao_clientes_x_clientes"])
 

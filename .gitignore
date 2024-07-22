@@ -18,3 +18,4 @@
 *registro.csv
 *venv
 *.vscode
+*.mypy_cache

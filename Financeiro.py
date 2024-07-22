@@ -1,6 +1,6 @@
 from Entities.tratar_arquivos_excel_imobme import ImobmeExceltoConvert
 from Entities.extraction_imobme import BotExtractionImobme
-from Entities.credential.carregar_credenciais import Credential
+from Entities.credenciais import Credential
 import os
 from getpass import getuser
 from Entities.registro.registro import Registro
@@ -20,8 +20,8 @@ if __name__ == "__main__":
     tempo_agora = datetime.now()
     try:
         
-        entrada: dict = Credential().credencial()
-        if (entrada['usuario'] == None) or (entrada['senha'] == None):
+        entrada: dict = Credential('IMOBME_PRD').load()
+        if (entrada['login'] == None) or (entrada['password'] == None):
             raise PermissionError("Credenciais Invalidas")
 
         down_path = f"{os.getcwd()}\\downloads_financeiro\\"
@@ -29,7 +29,7 @@ if __name__ == "__main__":
         #primeira parte
         for x in range(5):
             try:   
-                bot_relatorio = BotExtractionImobme(user=entrada['usuario'],password=entrada['senha'],download_path=down_path)
+                bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path)
                 
                 bot_relatorio.start([
                     "imobme_dados_contrato",
@@ -56,7 +56,7 @@ if __name__ == "__main__":
         #segunda parte        
         for x in range(5):
             try:
-                bot_relatorio = BotExtractionImobme(user=entrada['usuario'],password=entrada['senha'],download_path=down_path)
+                bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path)
                 
                 bot_relatorio.start([
                     "recebimentos_compensados",

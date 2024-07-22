@@ -444,9 +444,11 @@ class BotExtractionImobme():
                 if not file.endswith(".xlsx"):
                     isnot_excel = True
             if not isnot_excel:
+                sleep(2)
                 break
             else:
                 sleep(1)
+        self.navegador.find_element(By.TAG_NAME, 'html').location
         
         
 if __name__ == "__main__":
