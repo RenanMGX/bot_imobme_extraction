@@ -2,18 +2,19 @@ import sys
 sys.path.append("Entities")
 from Entities.tratar_arquivos_excel_imobme import ImobmeExceltoConvert
 from Entities.extraction_imobme import BotExtractionImobme
-from Entities.credenciais import Credential
+from Entities.dependencies.credenciais import Credential
 import os
 from getpass import getuser
-from Entities.registro.registro import Registro
+from Entities.dependencies.logs import Logs
 import traceback
 from datetime import datetime
+from Entities.dependencies.config import Config
 
 if __name__ == "__main__":
     try:
-        reg = Registro("SambaExtract.py")
+        reg = Logs()
 
-        entrada: dict = Credential('IMOBME_PRD').load()
+        entrada: dict = Credential(Config()['credential']['crd']).load()
         if (entrada['login'] == None) or (entrada['password'] == None):
             raise PermissionError("Credenciais Invalidas")
 
@@ -33,7 +34,7 @@ if __name__ == "__main__":
                     erro_trace = traceback.format_exc()
                     print(erro_trace)
                     erro_trace = erro_trace.replace("\n", "|||")
-                    reg.record(f"{type(error)};{error} traceback:  {erro_trace}")
+                    reg.register(status='Error', description=str(error), exception=erro_trace)
             finally:
                 try:
                     bot_relatorio.navegador.close()

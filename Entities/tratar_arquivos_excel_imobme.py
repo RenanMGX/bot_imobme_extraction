@@ -1,5 +1,7 @@
 import os
-from registro.registro import Registro # type: ignore
+#from registro.registro import Registro # type: ignore
+from dependencies.logs import Logs
+from dependencies.functions import P
 import pandas as pd
 import xlwings as xw # type: ignore
 from copy import deepcopy
@@ -15,9 +17,10 @@ class ImobmeExceltoConvert():
         Args:
             path (str): caminho de onde os arquivos estão
         """
-        self.__error_log = Registro("tratar_arquivos_excel_imobme")
+        self.__error_log = Logs()
         self.__files_path = path
         self.__files_path_temp = self.__files_path + "temp_files\\"
+        print(P("Iniciando conversão de relatorios"))
         
     
     def _verificFiles(self) -> tuple:
@@ -60,8 +63,8 @@ class ImobmeExceltoConvert():
                     
                     files_dict[file] = df
                 app.kill()
-            except:
-                self.__error_log.record(traceback.format_exc(), 'Error')
+            except Exception as error:
+                self.__error_log.register(status='Error', description=str(error), exception=traceback.format_exc())
                 files_dict[file] = None
             
         return files_dict
@@ -72,6 +75,7 @@ class ImobmeExceltoConvert():
         Args:
             copyto (str): caminho onde vai salvar o arquivo json
         """
+        print(P(f"tranformando arquivos em json e salvando em {copyto}"))
         if copyto[-1] != "\\":
             copyto += "\\"
                     
@@ -93,6 +97,7 @@ class ImobmeExceltoConvert():
         Args:
             copyto (str): caminho onde será salvo o arquivo csv
         """
+        print(P(f"tranformando arquivos em csv e salvando em {copyto}"))
         if copyto[-1] != "\\":
             copyto += "\\"
                     
