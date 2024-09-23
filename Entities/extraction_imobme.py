@@ -45,7 +45,9 @@ def verific_login(f):
     return wrap
 
 @verific_login
-def _find_element(*, browser: webdriver.Chrome, mod, target:str, timeout:int=30, can_pass:bool=False):
+def _find_element(*, browser: webdriver.Chrome, mod, target:str, timeout:int=30, can_pass:bool=False, wait:float=.2):
+    if wait > 0:
+        sleep(wait)
     for _ in range(timeout*4):
         try:
             obj = browser.find_element(mod, target)
@@ -125,7 +127,8 @@ class BotExtractionImobme():
                 finalizou:bool = False
                 for num in range(5):
                     try:
-                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Content"]').location_once_scrolled_into_view
+                        _find_element(browser=self.navegador, mod=By.ID, target='Relatorios_chzn').click() # clique em selecionar Relatorios
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn_o_8"]').click() # clique em IMOBME - Empreendimento
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clique em selecionar Emprendimentos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label/input').click() # clique em selecionar todos os empreendimentos
@@ -148,10 +151,13 @@ class BotExtractionImobme():
                 finalizou:bool = False
                 for num in range(5):
                     try:
-                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Content"]').location_once_scrolled_into_view
+                        _find_element(browser=self.navegador, mod=By.ID, target='Relatorios_chzn').click() # clique em selecionar Relatorios
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn_o_6"]').click() # clique em IMOBME - Contre de Vendas
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataInicio"]').send_keys("01012015") # escreve a data de inicio padrao 01/01/2015
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataFim"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data hoje
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="TipoDataSelecionada_chzn"]/a').click() # clique em Tipo Data
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="TipoDataSelecionada_chzn_o_0"]').click() # clique em Data Lançamento Venda
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clique em Empreendimentos
@@ -175,10 +181,13 @@ class BotExtractionImobme():
                 finalizou:bool = False
                 for num in range(5):
                     try:
-                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Content"]').location_once_scrolled_into_view
+                        _find_element(browser=self.navegador, mod=By.ID, target='Relatorios_chzn').click() # clique em selecionar Relatorios
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn_o_6"]').click() # clique em IMOBME - Contre de Vendas
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataInicio"]').send_keys((datetime.now() - relativedelta(days=90)).strftime("%d%m%Y")) # escreve a data de inicio com um range de 90 dias
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataFim"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data hoje
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="TipoDataSelecionada_chzn"]/a').click() # clique em Tipo Data
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="TipoDataSelecionada_chzn_o_0"]').click() # clique em Data Lançamento Venda
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clique em Empreendimentos
@@ -202,10 +211,13 @@ class BotExtractionImobme():
                 finalizou:bool = False
                 for num in range(5):
                     try:
-                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Content"]').location_once_scrolled_into_view
+                        _find_element(browser=self.navegador, mod=By.ID, target='Relatorios_chzn').click() # clique em selecionar Relatorios
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn_o_4"]').click()  # clique em IMOBME - Contratos Rescindicos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataInicio"]').send_keys("01012015") # escreve a data de inicio padrao 01/01/2015
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataFim"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data hoje
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[2]/div/div[3]/div/button').click()  # clique em Tipo de Contrato
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[2]/div/div[3]/div/ul/li[2]/a/label/input').click() # clique em Todos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[2]/div/div[3]/div/button').click() # clique em Tipo de Contrato
@@ -230,10 +242,13 @@ class BotExtractionImobme():
                 finalizou:bool = False
                 for num in range(5):
                     try:
-                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Content"]').location_once_scrolled_into_view
+                        _find_element(browser=self.navegador, mod=By.ID, target='Relatorios_chzn').click() # clique em selecionar Relatorios
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn_o_4"]').click()  # clique em IMOBME - Contratos Rescindicos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataInicio"]').send_keys((datetime.now() - relativedelta(days=90)).strftime("%d%m%Y")) # escreve a data de inicio padrao 01/01/2015
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataFim"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data hoje
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[2]/div/div[3]/div/button').click()  # clique em Tipo de Contrato
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[2]/div/div[3]/div/ul/li[2]/a/label/input').click() # clique em Todos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[2]/div/div[3]/div/button').click() # clique em Tipo de Contrato
@@ -258,7 +273,8 @@ class BotExtractionImobme():
                 finalizou:bool = False
                 for num in range(5):
                     try:
-                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Content"]').location_once_scrolled_into_view
+                        _find_element(browser=self.navegador, mod=By.ID, target='Relatorios_chzn').click() # clique em selecionar Relatorios
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn_o_7"]').click() # clique em IMOBME - Dados de Contrato
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label').click() # clica em todos
@@ -268,6 +284,7 @@ class BotExtractionImobme():
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[3]/div[1]/div/ul/li[2]/a/label/input').click() # clica em Todos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[1]/div').click() # clica fora
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataBase"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data hoje
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="GerarRelatorio"]').click() # clica em gerar relatorio
                         sleep(7)
@@ -287,14 +304,18 @@ class BotExtractionImobme():
                 finalizou:bool = False
                 for num in range(5):
                     try:
-                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Content"]').location_once_scrolled_into_view
+                        _find_element(browser=self.navegador, mod=By.ID, target='Relatorios_chzn').click() # clique em selecionar Relatorios
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn_o_9"]').click() # clique em IMOBME - Previsão de Receita
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataInicio"]').send_keys("01012015") # escreve a data de inicio padrao 01/01/2015
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataFim"]').send_keys((datetime.now() + relativedelta(years=25)).strftime("%d%m%Y")) # escreve a data de fim padrao com a data atual mais 25 anos
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label/input').click() # clica em todos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataBase"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data de hoje
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[4]/div/div[2]/div/button').click() # clica em Tipo Parcela
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[4]/div/div[2]/div/ul/li[2]/a/label/input').click() # clica em Todos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[4]/div/div[2]/div/button').click() # clica em Tipo Parcela
@@ -317,10 +338,13 @@ class BotExtractionImobme():
                 finalizou:bool = False
                 for num in range(5):
                     try:
-                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Content"]').location_once_scrolled_into_view
+                        _find_element(browser=self.navegador, mod=By.ID, target='Relatorios_chzn').click() # clique em selecionar Relatorios
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn_o_10"]').click() # clique em IMOBME - Relação de Clientes
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataInicio"]').send_keys("01012015") # escreve a data de inicio padrao 01/01/2015
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataFim"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data de hoje
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="GerarRelatorio"]').click() # clica em gerar relatorio
                         sleep(7)
@@ -340,7 +364,8 @@ class BotExtractionImobme():
                 finalizou:bool = False
                 for num in range(5):
                     try:
-                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Content"]').location_once_scrolled_into_view
+                        _find_element(browser=self.navegador, mod=By.ID, target='Relatorios_chzn').click() # clique em selecionar Relatorios
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn_o_10"]').click() # clique em IMOBME - Relação de Clientes
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="tipoReportCliente_chzn"]').click() # clica em tipo de relatorio
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="tipoReportCliente_chzn_o_1"]').click() # clica em clientes x contratos
@@ -351,7 +376,9 @@ class BotExtractionImobme():
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label/input').click() # clica em todos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em empreendimentos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataInicio"]').send_keys("01012015") # escreve a data de inicio padrao 01/01/2015
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataFim"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data de hoje
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="GerarRelatorio"]').click() # clica em gerar relatorio
                         sleep(7)
@@ -371,7 +398,8 @@ class BotExtractionImobme():
                 finalizou:bool = False
                 for num in range(5):
                     try:
-                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Content"]').location_once_scrolled_into_view
+                        _find_element(browser=self.navegador, mod=By.ID, target='Relatorios_chzn').click() # clique em selecionar Relatorios
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn_o_3"]').click()  # clique em IMOBME - Cadastro de Datas
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label').click() # clica em todos
@@ -395,10 +423,13 @@ class BotExtractionImobme():
                 finalizou:bool = False
                 for num in range(5):
                     try:
-                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Content"]').location_once_scrolled_into_view
+                        _find_element(browser=self.navegador, mod=By.ID, target='Relatorios_chzn').click() # clique em selecionar Relatorios
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn_o_16"]').click()  # clique em Recebimentos Compensados
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataInicio"]').send_keys("01012020") # escreve a data de inicio padrao 01/01/2020
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataFim"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data de hoje
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/ul/li[2]/a/label').click() # clica em todos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
@@ -421,12 +452,14 @@ class BotExtractionImobme():
                 finalizou:bool = False
                 for num in range(5):
                     try:
-                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn"]/a').click() # clique em selecionar Relatorios
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Content"]').location_once_scrolled_into_view
+                        _find_element(browser=self.navegador, mod=By.ID, target='Relatorios_chzn').click() # clique em selecionar Relatorios
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Relatorios_chzn_o_5"]').click() # clique em IMOBME - Controle de Estoque
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[2]/div[1]/div/div/button').click() # clica em Empreendimentos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[2]/div[1]/div/div/ul/li[2]/a/label/input').click() # clica em todos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[2]/div[1]/div/div/button').click() # clica em Empreendimentos novamente para sair
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataBase"]').send_keys(datetime.now().strftime("%d%m%Y"))
+                        _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
                         
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="GerarRelatorio"]').click() # clica em gerar relatorio
                         sleep(7)
