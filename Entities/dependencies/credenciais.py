@@ -125,7 +125,7 @@ class Credential:
         return self.criar_cifra(text, -key)
         
 if __name__ == "__main__":
-    crd = Credential('SAP_QAS-Renan')
+    crd = Credential('IntegracaoWebSFTP')
     
     
     print(crd.load())

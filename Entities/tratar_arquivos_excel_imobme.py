@@ -125,10 +125,29 @@ class ImobmeExceltoConvert():
             
             if "Empreendimentos" in file_name:
                 df = self.integraWeb_empreendimentos(df)
+                df = self.filtrar_empreendimentos(df, coluna='Nome Do Empreendimento')
+            elif "DadosContrato" in file_name:
+                df = self.filtrar_empreendimentos(df, coluna="Empreendimento")
             
             df.to_csv(((copyto + datetime.now().strftime('%d-%m-%Y_') + file_name) + ".csv") , sep=';', index=False, encoding='latin1', errors='ignore', decimal=',')
         
         return True
+    
+    
+    
+    def filtrar_empreendimentos(self, df:pd.DataFrame, *, coluna:str) -> pd.DataFrame:
+        rows_to_remove_empreendimento:list = [
+            "Novolar Moinho",
+            "Novolar Atlanta",
+            "Novolar Jardins do Brito",
+            "Novolar Green Life"
+        ]
+        
+        df_temp = pd.DataFrame()
+        for rows in rows_to_remove_empreendimento:
+            df_temp = pd.concat([df_temp, df[df[coluna] == rows]], ignore_index=True)
+            
+        return df_temp
             
     def integraWeb_empreendimentos(self, df:pd.DataFrame) -> pd.DataFrame:
         columns_to_remove: list = [
@@ -156,60 +175,62 @@ class ImobmeExceltoConvert():
         df = df[columns]
         
         #remove rows of column 'Nome Do Empreendimento'
-        rows_to_remove: list = [
-            'Acqua Galleria Condomínio Resort - Condomínio 1',
-            'Acqua Galleria Condomínio Resort - Condomínio 2',
-            'Acqua Galleria Condomínio Resort - Condomínio 3',
-            'Edifício Adelaide Santiago',
-            'Edifício Adelaide Santiago - Avulsos',
-            'Edifício Apogée - Avulsos',
-            'Edifício Avignon - Avulsos',
-            'Edifício Brooklyn',
-            'Edifício Brooklyn - Avulsos',
-            'Edifício Gioia Del Colle',
-            'Edifício Jornalista Oswaldo Nobre',
-            'Edifício Key Biscayne',
-            "Edifício L'Essence - Avulsos",
-            'Edifício Maura Valadares Gontijo',
-            'Edifício Mayfair Offices',
-            'Edifício Nashville',
-            'Edifício Neuchâtel',
-            'Edifício Neuchâtel - Avulsos',
-            'Edifício Niagara Falls - Edifício Angel Falls - Edifício Victoria Falls',
-            'Edifício Olga Chiari',
-            'Edifício Professor Danilo Ambrósio',
-            'Edifício Saint Emilion',
-            'Edifício Saint Tropez',
-            'Edifício Saint Tropez - Avulsos',
-            'Edifício Soho Square',
-            'Edifício Tribeca Square',
-            'Edifício Vivaldi Moreira [Holiday Inn]',
-            'Four Seasons Condomínio Resort',
-            'Greenport Residences',
-            'Greenwich Village',
-            'Manhattan Square',
-            'Manhattan Square - Avulsos',
-            'Mia Felicitá Condomínio',
-            'Olga Gutierrez - Avulsos',
-            'Palo Alto Residences',
-            'Palo Alto Residences - Avulsos',
-            'Park Residence Condomínio Resort',
-            'Park Residence Condomínio Resort - Avulsos',
-            'Priorato Residence',
-            'Quintas do Morro',
-            'Residencial Porto Fino',
-            'Residencial Ruth Silveira e Ruth Silveira Stores',
-            'Residencial Springfield',
-            'The Plaza',
-            'The Plaza - Avulsos',
-            'Union Square',
-            'Unique - Avulsos',
-            'Villaggio Gutierrez',
-            'Villaggio Gutierrez - Avulsos'
-        ]
-        for rows in rows_to_remove:
-            df = df[df['Nome Do Empreendimento'] != rows]
+        # rows_to_remove: list = [
+        #     'Acqua Galleria Condomínio Resort - Condomínio 1',
+        #     'Acqua Galleria Condomínio Resort - Condomínio 2',
+        #     'Acqua Galleria Condomínio Resort - Condomínio 3',
+        #     'Edifício Adelaide Santiago',
+        #     'Edifício Adelaide Santiago - Avulsos',
+        #     'Edifício Apogée - Avulsos',
+        #     'Edifício Avignon - Avulsos',
+        #     'Edifício Brooklyn',
+        #     'Edifício Brooklyn - Avulsos',
+        #     'Edifício Gioia Del Colle',
+        #     'Edifício Jornalista Oswaldo Nobre',
+        #     'Edifício Key Biscayne',
+        #     "Edifício L'Essence - Avulsos",
+        #     'Edifício Maura Valadares Gontijo',
+        #     'Edifício Mayfair Offices',
+        #     'Edifício Nashville',
+        #     'Edifício Neuchâtel',
+        #     'Edifício Neuchâtel - Avulsos',
+        #     'Edifício Niagara Falls - Edifício Angel Falls - Edifício Victoria Falls',
+        #     'Edifício Olga Chiari',
+        #     'Edifício Professor Danilo Ambrósio',
+        #     'Edifício Saint Emilion',
+        #     'Edifício Saint Tropez',
+        #     'Edifício Saint Tropez - Avulsos',
+        #     'Edifício Soho Square',
+        #     'Edifício Tribeca Square',
+        #     'Edifício Vivaldi Moreira [Holiday Inn]',
+        #     'Four Seasons Condomínio Resort',
+        #     'Greenport Residences',
+        #     'Greenwich Village',
+        #     'Manhattan Square',
+        #     'Manhattan Square - Avulsos',
+        #     'Mia Felicitá Condomínio',
+        #     'Olga Gutierrez - Avulsos',
+        #     'Palo Alto Residences',
+        #     'Palo Alto Residences - Avulsos',
+        #     'Park Residence Condomínio Resort',
+        #     'Park Residence Condomínio Resort - Avulsos',
+        #     'Priorato Residence',
+        #     'Quintas do Morro',
+        #     'Residencial Porto Fino',
+        #     'Residencial Ruth Silveira e Ruth Silveira Stores',
+        #     'Residencial Springfield',
+        #     'The Plaza',
+        #     'The Plaza - Avulsos',
+        #     'Union Square',
+        #     'Unique - Avulsos',
+        #     'Villaggio Gutierrez',
+        #     'Villaggio Gutierrez - Avulsos'
+        # ]
+        # for rows in rows_to_remove:
+        #     df = df[df['Nome Do Empreendimento'] != rows]
         ##
+        
+        
             
         #remove rows of column 'Status Da Unidade'
         rows_to_remove = [

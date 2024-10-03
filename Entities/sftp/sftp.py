@@ -1,19 +1,12 @@
 import paramiko
 import os
+from Entities.dependencies.config import Config
+from Entities.dependencies.credenciais import Credential
 
 class TransferenciaSFTP():
-    def __init__(self, credencias=None):
+    def __init__(self, *args, **kwargs):
         
-        if not isinstance(credencias, dict):
-            raise TypeError("Apenas Dicionarios são permitidos nessa instancia")
-        if not "hostname" in credencias:
-            raise KeyError("'hostname' not found")
-        elif not "port" in credencias:
-            raise KeyError("'port' not found")
-        elif not "username" in credencias:
-            raise KeyError("'username' not found")
-        elif not "password" in credencias:
-            raise KeyError("'password' not found")
+        credencias:dict = Credential(Config()['credential']['sftp']).load()
         
         self.__hostname = credencias['hostname']
         self.__port = credencias['port']
