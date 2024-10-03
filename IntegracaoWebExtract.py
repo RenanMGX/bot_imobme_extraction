@@ -19,9 +19,9 @@ if __name__ == "__main__":
     down_path = os.path.join(os.getcwd(), "downloads_IntegracaoWeb\\")
      
     ## extrair relatorio        
-    # bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path)
+    bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path)
 
-    # bot_relatorio.start(["imobme_dados_contrato", "imobme_empreendimento"])
+    bot_relatorio.start(["imobme_dados_contrato", "imobme_empreendimento"])
      ## extrair relatorio  -- fim
 
     arquivos = []
