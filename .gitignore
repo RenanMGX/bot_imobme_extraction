@@ -20,6 +20,8 @@
 *.vscode
 *.mypy_cache
 *config.init
+*Logs
+*temp_IntegracaoWeb
 
 
 

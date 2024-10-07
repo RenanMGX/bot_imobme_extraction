@@ -9,6 +9,7 @@ from time import sleep
 from typing import Dict
 from datetime import datetime
 import traceback
+from getpass import getuser
 
 class ImobmeExceltoConvert():
     def __init__(self, path:str) -> None:
@@ -124,134 +125,91 @@ class ImobmeExceltoConvert():
             file_name = path.split('\\')[-1].split('_')[0]
             
             if "Empreendimentos" in file_name:
-                df = self.integraWeb_empreendimentos(df)
-                df = self.filtrar_empreendimentos(df, coluna='Nome Do Empreendimento')
+                df = self.integraWeb_empreendimentos_filtros(df)
             elif "DadosContrato" in file_name:
-                df = self.filtrar_empreendimentos(df, coluna="Empreendimento")
+                df = self.integraWeb_dadoscontrato_filtros(df)
             
             df.to_csv(((copyto + datetime.now().strftime('%d-%m-%Y_') + file_name) + ".csv") , sep=';', index=False, encoding='latin1', errors='ignore', decimal=',')
         
         return True
     
+    def integraWeb_empreendimentos_filtros(self, df:pd.DataFrame) -> pd.DataFrame:
+        return TratamentoDF(df
+                ).columns_to_remove(columns_to_remove=[
+                    'Área Terreno',
+                    'Área Construída',
+                    'Valor Reconstrução',
+                    'Matrícula',
+                    'Registro',
+                    'PEP Empreendimento',
+                    'Número De Unidades',
+                    'Data Da Opção da Planta Fase',
+                    'Andar Início',
+                    'Andar Fim',
+                    'Data Opção Planta Bloco',
+                    'Data Habite-se Bloco',
+                    'Número Do Andar',
+                    'Código Do Final',
+                    'Número De Dormitórios',
+                    'Número De Banheiro',
+                    'PEP Personalização'
+                ]).rows_to_remove(column='Status Da Unidade', value_in_rows=[
+                    'Quitada',
+                    #'Vendida',
+                    #'Bloqueada',
+                    'Permuta',
+                    #'Análise de Crédito / Risco',
+                    #'Contratos - Validação',
+                    #'Em Efetivação',
+                    #'Disponível'
+                ]).rows_to_keep(column='Nome Do Empreendimento', value_in_rows=[
+                    "Novolar Moinho",
+                    "Novolar Atlanta",
+                    "Novolar Jardins do Brito",
+                    "Novolar Green Life"
+                ]).df
+                
+    def integraWeb_dadoscontrato_filtros(self, df: pd.DataFrame) -> pd.DataFrame:
+        return TratamentoDF(df
+                ).rows_to_keep(column='Tipo de Contrato', value_in_rows=[
+                    'PCV',
+                    'Cessão'
+                ]).rows_to_keep(column='Status', value_in_rows=[
+                    'Ativo',
+                    'Quitado'
+                ]).rows_to_keep(column='Empreendimento', value_in_rows=[
+                    "Novolar Moinho",
+                    "Novolar Atlanta",
+                    "Novolar Jardins do Brito",
+                    "Novolar Green Life"
+                ]).df    
     
+class TratamentoDF:
+    def __init__(self, df: pd.DataFrame) -> None:
+        self.df:pd.DataFrame = df            
     
-    def filtrar_empreendimentos(self, df:pd.DataFrame, *, coluna:str) -> pd.DataFrame:
-        rows_to_remove_empreendimento:list = [
-            "Novolar Moinho",
-            "Novolar Atlanta",
-            "Novolar Jardins do Brito",
-            "Novolar Green Life"
-        ]
-        
-        df_temp = pd.DataFrame()
-        for rows in rows_to_remove_empreendimento:
-            df_temp = pd.concat([df_temp, df[df[coluna] == rows]], ignore_index=True)
-            
-        return df_temp
-            
-    def integraWeb_empreendimentos(self, df:pd.DataFrame) -> pd.DataFrame:
-        columns_to_remove: list = [
-            'Área Terreno',
-            'Área Construída',
-            'Valor Reconstrução',
-            'Matrícula',
-            'Registro',
-            'PEP Empreendimento',
-            'Número De Unidades',
-            'Data Da Opção da Planta Fase',
-            'Andar Início',
-            'Andar Fim',
-            'Data Opção Planta Bloco',
-            'Data Habite-se Bloco',
-            'Número Do Andar',
-            'Código Do Final',
-            'Número De Dormitórios',
-            'Número De Banheiro',
-            'PEP Personalização'
-        ]
-        columns = df.columns.to_list()
-        for remove in columns_to_remove:
-            columns.pop(columns.index(remove))
-        df = df[columns]
-        
-        #remove rows of column 'Nome Do Empreendimento'
-        # rows_to_remove: list = [
-        #     'Acqua Galleria Condomínio Resort - Condomínio 1',
-        #     'Acqua Galleria Condomínio Resort - Condomínio 2',
-        #     'Acqua Galleria Condomínio Resort - Condomínio 3',
-        #     'Edifício Adelaide Santiago',
-        #     'Edifício Adelaide Santiago - Avulsos',
-        #     'Edifício Apogée - Avulsos',
-        #     'Edifício Avignon - Avulsos',
-        #     'Edifício Brooklyn',
-        #     'Edifício Brooklyn - Avulsos',
-        #     'Edifício Gioia Del Colle',
-        #     'Edifício Jornalista Oswaldo Nobre',
-        #     'Edifício Key Biscayne',
-        #     "Edifício L'Essence - Avulsos",
-        #     'Edifício Maura Valadares Gontijo',
-        #     'Edifício Mayfair Offices',
-        #     'Edifício Nashville',
-        #     'Edifício Neuchâtel',
-        #     'Edifício Neuchâtel - Avulsos',
-        #     'Edifício Niagara Falls - Edifício Angel Falls - Edifício Victoria Falls',
-        #     'Edifício Olga Chiari',
-        #     'Edifício Professor Danilo Ambrósio',
-        #     'Edifício Saint Emilion',
-        #     'Edifício Saint Tropez',
-        #     'Edifício Saint Tropez - Avulsos',
-        #     'Edifício Soho Square',
-        #     'Edifício Tribeca Square',
-        #     'Edifício Vivaldi Moreira [Holiday Inn]',
-        #     'Four Seasons Condomínio Resort',
-        #     'Greenport Residences',
-        #     'Greenwich Village',
-        #     'Manhattan Square',
-        #     'Manhattan Square - Avulsos',
-        #     'Mia Felicitá Condomínio',
-        #     'Olga Gutierrez - Avulsos',
-        #     'Palo Alto Residences',
-        #     'Palo Alto Residences - Avulsos',
-        #     'Park Residence Condomínio Resort',
-        #     'Park Residence Condomínio Resort - Avulsos',
-        #     'Priorato Residence',
-        #     'Quintas do Morro',
-        #     'Residencial Porto Fino',
-        #     'Residencial Ruth Silveira e Ruth Silveira Stores',
-        #     'Residencial Springfield',
-        #     'The Plaza',
-        #     'The Plaza - Avulsos',
-        #     'Union Square',
-        #     'Unique - Avulsos',
-        #     'Villaggio Gutierrez',
-        #     'Villaggio Gutierrez - Avulsos'
-        # ]
-        # for rows in rows_to_remove:
-        #     df = df[df['Nome Do Empreendimento'] != rows]
-        ##
-        
-        
-            
-        #remove rows of column 'Status Da Unidade'
-        rows_to_remove = [
-            'Quitada',
-            #'Vendida',
-            #'Bloqueada',
-            'Permuta',
-            #'Análise de Crédito / Risco',
-            #'Contratos - Validação',
-            #'Em Efetivação',
-            #'Disponível'
-        ]
-        for rows in rows_to_remove:
-            df = df[df['Status Da Unidade'] != rows]
-        ##
-        
-        return df
+    def columns_to_remove(self, *, columns_to_remove:list):
+        columns = self.df.columns.to_list()
+        for column in columns_to_remove:
+            columns.pop(columns.index(column))
+        self.df = self.df[columns]
+        return self
+    
+    def rows_to_keep(self, *, column:str, value_in_rows:list):
+        df_temp:pd.DataFrame = pd.DataFrame()
+        for rows in value_in_rows:
+            df_temp = pd.concat([df_temp, self.df[self.df[column] == rows]], ignore_index=True)
+        self.df = df_temp
+        return self
+    
+    def rows_to_remove(self, *, column:str, value_in_rows:list):
+        for rows in value_in_rows:
+            self.df = self.df[self.df[column] != rows]
+        return self
 
 if __name__ == "__main__":
     down_path = f"{os.getcwd()}\\downloads_samba\\"
     
-    print(ImobmeExceltoConvert(path=down_path).extract_csv_integraWeb(r"C:\Users\renan.oliveira\Downloads"))
+    print(ImobmeExceltoConvert(path=down_path).extract_csv_integraWeb(f"C:\\Users\\{getuser()}\\Downloads"))
     
         
