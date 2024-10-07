@@ -53,12 +53,10 @@ if __name__ == "__main__":
             arqui = os.path.join(caminho_temp, arqui)
             arquivos_do_temp.append(arqui)
     
-        from credential_sftp import crendencial_sftp_apart
-        crendencial_sftp = crendencial_sftp_apart
     
         #transferir arquivo via SFTP
         if TRANSFERIR_FTP:
-            transfer = TransferenciaSFTP(crendencial_sftp)
+            transfer = TransferenciaSFTP()
             for arqui in arquivos_do_temp:
                 nome_arquivo = arqui.split('\\')[-1]
                 transfer.transferir(arqui, f"public_html/bases/{nome_arquivo}")
