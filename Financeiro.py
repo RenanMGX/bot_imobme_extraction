@@ -9,11 +9,6 @@ from datetime import datetime
 import traceback
 from Entities.dependencies.config import Config
 
-def error_except(error):
-    erro_trace = traceback.format_exc()
-    print(erro_trace)
-    erro_trace = erro_trace.replace("\n", " <br> ")
-    Logs().register(status='Report', description=str(error), exception=erro_trace)
     
 
 if __name__ == "__main__":
@@ -42,8 +37,8 @@ if __name__ == "__main__":
                 ])
                 ImobmeExceltoConvert(path=down_path).extract_json(f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\')
                 break
-            except Exception as error:
-                error_except(error)
+            except Exception as err:
+                Logs().register(status='Report', description=str(err), exception=traceback.format_exc())
             finally:
                 try:
                     bot_relatorio.navegador.close()
@@ -64,8 +59,8 @@ if __name__ == "__main__":
                 ])
                 ImobmeExceltoConvert(path=down_path).extract_json(f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\')
                 break
-            except Exception as error:
-                error_except(error)
+            except Exception as err:
+                Logs().register(status='Report', description=str(err), exception=traceback.format_exc())
             finally:
                 try:
                     bot_relatorio.navegador.close()

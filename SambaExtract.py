@@ -30,11 +30,8 @@ if __name__ == "__main__":
                 if final:
                     bot_relatorio.navegador.close()
                     break
-            except Exception as error:
-                    erro_trace = traceback.format_exc()
-                    print(erro_trace)
-                    erro_trace = erro_trace.replace("\n", "|||")
-                    reg.register(status='Report', description=str(error), exception=erro_trace)
+            except Exception as err:
+                    reg.register(status='Report', description=str(err), exception=traceback.format_exc())
             finally:
                 try:
                     bot_relatorio.navegador.close()
