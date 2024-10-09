@@ -18,7 +18,6 @@ class ImobmeExceltoConvert():
         Args:
             path (str): caminho de onde os arquivos estão
         """
-        self.__error_log = Logs()
         self.__files_path = path
         self.__files_path_temp = self.__files_path + "temp_files\\"
         print(P("Iniciando conversão de relatorios"))
@@ -65,7 +64,7 @@ class ImobmeExceltoConvert():
                     files_dict[file] = df
                 app.kill()
             except Exception as error:
-                self.__error_log.register(status='Error', description=str(error), exception=traceback.format_exc())
+                Logs().register(status='Report', description=str(error), exception=traceback.format_exc())
                 files_dict[file] = None
             
         return files_dict
@@ -125,15 +124,15 @@ class ImobmeExceltoConvert():
             file_name = path.split('\\')[-1].split('_')[0]
             
             if "Empreendimentos" in file_name:
-                df = self.integraWeb_empreendimentos_filtros(df)
+                df = self.__integraWeb_empreendimentos_filtros(df)
             elif "DadosContrato" in file_name:
-                df = self.integraWeb_dadoscontrato_filtros(df)
+                df = self.__integraWeb_dadoscontrato_filtros(df)
             
             df.to_csv(((copyto + datetime.now().strftime('%d-%m-%Y_') + file_name) + ".csv") , sep=';', index=False, encoding='latin1', errors='ignore', decimal=',')
         
         return True
     
-    def integraWeb_empreendimentos_filtros(self, df:pd.DataFrame) -> pd.DataFrame:
+    def __integraWeb_empreendimentos_filtros(self, df:pd.DataFrame) -> pd.DataFrame:
         return TratamentoDF(df
                 ).columns_to_remove(columns_to_remove=[
                     'Área Terreno',
@@ -169,7 +168,7 @@ class ImobmeExceltoConvert():
                     "Novolar Green Life"
                 ]).df
                 
-    def integraWeb_dadoscontrato_filtros(self, df: pd.DataFrame) -> pd.DataFrame:
+    def __integraWeb_dadoscontrato_filtros(self, df: pd.DataFrame) -> pd.DataFrame:
         return TratamentoDF(df
                 ).rows_to_keep(column='Tipo de Contrato', value_in_rows=[
                     'PCV',

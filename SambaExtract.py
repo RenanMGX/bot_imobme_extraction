@@ -34,18 +34,14 @@ if __name__ == "__main__":
                     erro_trace = traceback.format_exc()
                     print(erro_trace)
                     erro_trace = erro_trace.replace("\n", "|||")
-                    reg.register(status='Error', description=str(error), exception=erro_trace)
+                    reg.register(status='Report', description=str(error), exception=erro_trace)
             finally:
                 try:
                     bot_relatorio.navegador.close()
                     del bot_relatorio
                 except:
                     pass
-    except Exception as error:
-        path:str = "logs/"
-        if not os.path.exists(path):
-            os.makedirs(path)
-        file_name = path + f"LogError_{datetime.now().strftime('%d%m%Y%H%M%Y')}.txt"
-        with open(file_name, 'w', encoding='utf-8')as _file:
-            _file.write(traceback.format_exc())
-        raise error
+                
+        Logs().register(status='Concluido', description='Extração de relatorios da Sambatech foi Concluida!')
+    except Exception as err:
+        Logs().register(status='Error', description=str(err), exception=traceback.format_exc())

@@ -13,11 +13,10 @@ def error_except(error):
     erro_trace = traceback.format_exc()
     print(erro_trace)
     erro_trace = erro_trace.replace("\n", " <br> ")
-    reg.register(status='Error', description=str(error), exception=erro_trace)
+    Logs().register(status='Report', description=str(error), exception=erro_trace)
     
 
 if __name__ == "__main__":
-    reg = Logs()
     tempo_agora = datetime.now()
     try:
         
@@ -74,15 +73,7 @@ if __name__ == "__main__":
                 except:
                     pass
         #fim segunda parte
-                
-    except Exception as error:
-        reg.register(status='Error', description=str(error), exception=traceback.format_exc())
-        path:str = "logs/"
-        if not os.path.exists(path):
-            os.makedirs(path)
-        file_name = path + f"LogError_{datetime.now().strftime('%d%m%Y%H%M%Y')}.txt"
-        with open(file_name, 'w', encoding='utf-8')as _file:
-            _file.write(traceback.format_exc())
-        raise error
-    
-    print(datetime.now() - tempo_agora)
+        Logs().register(status='Concluido', description='Extração de relatorios do Financeiro concluida!')
+    except Exception as err:
+        Logs().register(status='Error', description=str(err), exception=traceback.format_exc())
+        

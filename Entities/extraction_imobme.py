@@ -65,7 +65,6 @@ def _find_element(*, browser: webdriver.Chrome, mod, target:str, timeout:int=30,
 
 class BotExtractionImobme():
     def __init__(self, user:str, password:str, download_path:str=f"{os.getcwd()}\\downloads\\") -> None:
-        self.__registro_error = Logs()
         self.__user:str = user
         self.__password:str = password
         self.download_path:str = download_path
@@ -99,11 +98,11 @@ class BotExtractionImobme():
         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="password"]').send_keys(Keys.RETURN)
         
         if _find_element(browser=self.navegador, mod=By.XPATH, target='/html/body/div[1]/div/div/div/div[2]/form/div/ul/li', timeout=1, can_pass=True).text == 'Login não encontrado.':
-            self.__registro_error.register(status='Error', description="Login não encontrado")
+            Logs().register(status='Report', description="Login não encontrado")
             raise PermissionError("Login não encontrado.")
         
         if 'Senha Inválida.' in (return_error:=_find_element(browser=self.navegador, mod=By.XPATH, target='/html/body/div[1]/div/div/div/div[2]/form/div/ul/li', timeout=1, can_pass=True).text):
-            self.__registro_error.register(status='Error', description=return_error)
+            Logs().register(status='Report', description=return_error)
             raise PermissionError(return_error)
         
         _find_element(browser=self.navegador, mod=By.XPATH, target='/html/body/div[2]/div[3]/div/button[1]/span', timeout=2, can_pass=True).click()
@@ -113,10 +112,10 @@ class BotExtractionImobme():
         TEMPO_ESPERA_TENTATIVA:float = .5
         
         if not isinstance(relatories, list):
-            self.__registro_error.register(status='Error', description=f"para extrair relatorios apenas listas são permitidas, {relatories=}")
+            Logs().register(status='Report', description=f"para extrair relatorios apenas listas são permitidas, {relatories=}")
             raise TypeError(f"para extrair relatorios apenas listas são permitidas, {relatories=}")
         if not relatories:
-            self.__registro_error.register(status='Error', description=f"a lista '{relatories=}' não pode estar vazia")
+            Logs().register(status='Report', description=f"a lista '{relatories=}' não pode estar vazia")
             raise ValueError(f"a lista '{relatories=}' não pode estar vazia")
         print(P(relatories))
         
@@ -146,7 +145,7 @@ class BotExtractionImobme():
                         break
                     except Exception as error:
                         self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
-                        self.__registro_error.register(status='Error', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
+                        Logs().register(status='Report', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
                         sleep(1)
                 if not finalizou:
                     raise Exception(f"erro ao gerar {relatorie=}")
@@ -179,7 +178,7 @@ class BotExtractionImobme():
                         break
                     except Exception as error:
                         self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
-                        self.__registro_error.register(status='Error', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
+                        Logs().register(status='Report', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
                         sleep(1)
                 if not finalizou:
                     raise Exception(f"erro ao gerar {relatorie=}")
@@ -211,7 +210,7 @@ class BotExtractionImobme():
                         break
                     except Exception as error:
                         self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
-                        self.__registro_error.register(status='Error', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
+                        Logs().register(status='Report', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
                         sleep(1)
                 if not finalizou:
                     raise Exception(f"erro ao gerar {relatorie=}")
@@ -244,7 +243,7 @@ class BotExtractionImobme():
                         break
                     except Exception as error:
                         self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
-                        self.__registro_error.register(status='Error', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
+                        Logs().register(status='Report', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
                         sleep(1)
                 if not finalizou:
                     raise Exception(f"erro ao gerar {relatorie=}")
@@ -277,7 +276,7 @@ class BotExtractionImobme():
                         break
                     except Exception as error:
                         self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
-                        self.__registro_error.register(status='Error', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
+                        Logs().register(status='Report', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
                         sleep(1)
                 if not finalizou:
                     raise Exception(f"erro ao gerar {relatorie=}")
@@ -310,7 +309,7 @@ class BotExtractionImobme():
 
                     except Exception as error:
                         self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
-                        self.__registro_error.register(status='Error', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
+                        Logs().register(status='Report', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
                         sleep(1)
                 if not finalizou:
                     raise Exception(f"erro ao gerar {relatorie=}")
@@ -346,7 +345,7 @@ class BotExtractionImobme():
 
                     except Exception as error:
                         self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
-                        self.__registro_error.register(status='Error', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
+                        Logs().register(status='Report', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
                         sleep(1)
                 if not finalizou:
                     raise Exception(f"erro ao gerar {relatorie=}")
@@ -374,7 +373,7 @@ class BotExtractionImobme():
 
                     except Exception as error:
                         self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
-                        self.__registro_error.register(status='Error', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
+                        Logs().register(status='Report', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
                         sleep(1)
                 if not finalizou:
                     raise Exception(f"erro ao gerar {relatorie=}")
@@ -410,7 +409,7 @@ class BotExtractionImobme():
 
                     except Exception as error:
                         self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
-                        self.__registro_error.register(status='Error', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
+                        Logs().register(status='Report', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
                         sleep(1)
                 if not finalizou:
                     raise Exception(f"erro ao gerar {relatorie=}")
@@ -437,7 +436,7 @@ class BotExtractionImobme():
 
                     except Exception as error:
                         self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
-                        self.__registro_error.register(status='Error', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
+                        Logs().register(status='Report', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
                         sleep(1)
                 if not finalizou:
                     raise Exception(f"erro ao gerar {relatorie=}")
@@ -468,7 +467,7 @@ class BotExtractionImobme():
 
                     except Exception as error:
                         self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
-                        self.__registro_error.register(status='Error', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
+                        Logs().register(status='Report', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
                         sleep(1)
                 if not finalizou:
                     raise Exception(f"erro ao gerar {relatorie=}")
@@ -497,7 +496,7 @@ class BotExtractionImobme():
 
                     except Exception as error:
                         self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
-                        self.__registro_error.register(status='Error', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
+                        Logs().register(status='Report', description=f"erro {num} ao gerar {relatorie=}", exception=traceback.format_exc())
                         sleep(1)
                 if not finalizou:
                     raise Exception(f"erro ao gerar {relatorie=}")
@@ -505,7 +504,7 @@ class BotExtractionImobme():
         if len(self.relatories_id) >= 1:
             return list(self.relatories_id.values())
         else:
-            self.__registro_error.register(status='Report', description="nenhum relatório foi gerado")
+            Logs().register(status='Report', description="nenhum relatório foi gerado")
             raise FileNotFoundError("nenhum relatório foi gerado")
         
     def start(self, relatories:list) -> None:
@@ -523,7 +522,7 @@ class BotExtractionImobme():
         while True:
             if cont_final > 2160:
                 print(P("saida emergencia acionada a espera da geração dos relatorios superou as 3 horas"))
-                self.__registro_error.register(status='Error', description=f"saida emergencia acionada a espera da geração dos relatorios superou as 3 horas")
+                Logs().register(status='Report', description=f"saida emergencia acionada a espera da geração dos relatorios superou as 3 horas")
                 raise TimeoutError("saida emergencia acionada a espera da geração dos relatorios superou as 3 horas")
             else:
                 cont_final += 1
