@@ -332,6 +332,7 @@ class BotExtractionImobme():
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="dvEmpreendimento"]/div[1]/div/div/button').click() # clica em Empreendimentos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="DataBase"]').send_keys(datetime.now().strftime("%d%m%Y")) # escreve a data de hoje
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="Header"]/div[1]/img[1]').click() #<-------------------
+                        sleep(1)
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[4]/div/div[2]/div/button').click() # clica em Tipo Parcela
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[4]/div/div[2]/div/ul/li[2]/a/label/input').click() # clica em Todos
                         _find_element(browser=self.navegador, mod=By.XPATH, target='//*[@id="parametrosReport"]/div[4]/div/div[2]/div/button').click() # clica em Tipo Parcela
@@ -520,10 +521,10 @@ class BotExtractionImobme():
         print(P("Iniciando verificação de download", color='cyan'))
         cont_final: int = 0
         while True:
-            if cont_final > 2160:
-                print(P("saida emergencia acionada a espera da geração dos relatorios superou as 3 horas"))
-                Logs().register(status='Report', description=f"saida emergencia acionada a espera da geração dos relatorios superou as 3 horas")
-                raise TimeoutError("saida emergencia acionada a espera da geração dos relatorios superou as 3 horas")
+            if cont_final >= 1080:
+                print(P("saida emergencia acionada a espera da geração dos relatorios superou as 1,5 horas"))
+                Logs().register(status='Report', description=f"saida emergencia acionada a espera da geração dos relatorios superou as 1,5 horas")
+                raise TimeoutError("saida emergencia acionada a espera da geração dos relatorios superou as 1,5 horas")
             else:
                 cont_final += 1
             if not relatories_id:
