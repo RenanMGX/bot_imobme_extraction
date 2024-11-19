@@ -1,7 +1,7 @@
 *build
 *dist
 *.spec
-*downloads
+*downloads_*
 *temp
 *__pycache__
 *creden.py
