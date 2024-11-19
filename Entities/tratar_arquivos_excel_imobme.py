@@ -37,7 +37,7 @@ class ImobmeExceltoConvert():
         for file in files:
             for exten in valid_exten:
                 if exten in file:
-                    files_list.append(self.__files_path + file)
+                    files_list.append(os.path.join(self.__files_path , file))
                     
         return tuple(files_list)
         
