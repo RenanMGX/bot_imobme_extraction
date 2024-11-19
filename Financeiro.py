@@ -17,7 +17,7 @@ def execute(lista:list, path:str=f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S
             raise PermissionError("Credenciais Invalidas")
 
         #down_path = f"{os.getcwd()}\\downloads_financeiro\\"
-        down_path = os.path.join(os.getcwd(), f"downloads_{os.path.basename(os.path.abspath(path))}")
+        down_path = os.path.join(os.getcwd(), f"downloads_{os.path.basename(os.path.abspath(path))}") + "\\"
         for _ in range(5):
             try:   
                 bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path)
