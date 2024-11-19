@@ -11,13 +11,14 @@ from Entities.dependencies.config import Config
 import multiprocessing
 from time import sleep
 
-def execute(lista:list, path:str=f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\'):
+def execute(lista:list, download:str="fin"):
         entrada: dict = Credential(Config()['credential']['crd']).load()
         if (entrada['login'] == None) or (entrada['password'] == None):
             raise PermissionError("Credenciais Invalidas")
 
+        path:str=f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\'
         #down_path = f"{os.getcwd()}\\downloads_financeiro\\"
-        down_path = os.path.join(os.getcwd(), f"downloads_{os.path.basename(os.path.abspath(path))}") + "\\"
+        down_path = os.path.join(os.getcwd(), f"downloads_{download}") + "\\"
         for _ in range(5):
             try:   
                 bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path)
@@ -52,16 +53,16 @@ if __name__ == "__main__":
             "imobme_contratos_rescindidos",
             "imobme_cadastro_datas",
             "imobme_empreendimento"
-        ],f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro_1\\',))
+        ],f'Relatorio_Imobme_Financeiro_1',))
         
         segundo = multiprocessing.Process(target=execute, args=([
             "recebimentos_compensados",
             "imobme_relacao_clientes_x_clientes"                    
-        ],f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro_2\\',))
+        ],f'Relatorio_Imobme_Financeiro_2',))
         
         terceiro = multiprocessing.Process(target=execute, args=([
             "imobme_previsao_receita",                 
-        ],f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro_3\\',))
+        ],f'Relatorio_Imobme_Financeiro_3',))
         
         
         primeiro.start()
