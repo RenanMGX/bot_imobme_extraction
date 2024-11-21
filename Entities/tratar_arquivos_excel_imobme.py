@@ -165,7 +165,8 @@ class ImobmeExceltoConvert():
                     "Novolar Moinho",
                     "Novolar Atlanta",
                     "Novolar Jardins do Brito",
-                    "Novolar Green Life"
+                    "Novolar Green Life",
+                    "Novolar Alamedas do Brito"
                 ]).df
                 
     def __integraWeb_dadoscontrato_filtros(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -180,7 +181,8 @@ class ImobmeExceltoConvert():
                     "Novolar Moinho",
                     "Novolar Atlanta",
                     "Novolar Jardins do Brito",
-                    "Novolar Green Life"
+                    "Novolar Green Life",
+                    "Novolar Alamedas do Brito"
                 ]).df    
     
 class TratamentoDF:

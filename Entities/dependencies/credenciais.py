@@ -125,7 +125,8 @@ class Credential:
         return self.criar_cifra(text, -key)
         
 if __name__ == "__main__":
-    crd = Credential('IntegracaoWebSFTP')
+    
+    crd = Credential('XRM_API_QAS')
     
     
     print(crd.load())
