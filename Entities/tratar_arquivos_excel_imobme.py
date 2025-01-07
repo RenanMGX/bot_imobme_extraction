@@ -161,13 +161,6 @@ class ImobmeExceltoConvert():
                     #'Contratos - Validação',
                     #'Em Efetivação',
                     #'Disponível'
-                ]).rows_to_keep(column='Nome Do Empreendimento', value_in_rows=[
-                    "Novolar Moinho",
-                    "Novolar Atlanta",
-                    "Novolar Jardins do Brito",
-                    "Novolar Green Life",
-                    "Novolar Alamedas do Brito",
-                    "Novolar Reserva do Pontal"
                 ]).df
                 
     def __integraWeb_dadoscontrato_filtros(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -178,13 +171,6 @@ class ImobmeExceltoConvert():
                 ]).rows_to_keep(column='Status', value_in_rows=[
                     'Ativo',
                     'Quitado'
-                ]).rows_to_keep(column='Empreendimento', value_in_rows=[
-                    "Novolar Moinho",
-                    "Novolar Atlanta",
-                    "Novolar Jardins do Brito",
-                    "Novolar Green Life",
-                    "Novolar Alamedas do Brito",
-                    "Novolar Reserva do Pontal"
                 ]).df    
     
 class TratamentoDF:
