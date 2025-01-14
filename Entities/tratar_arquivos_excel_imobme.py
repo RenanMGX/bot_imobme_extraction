@@ -163,23 +163,7 @@ class ImobmeExceltoConvert():
                     #'Em Efetivação',
                     #'Disponível'
                 ])\
-                .rows_to_remove(column='Nome Do Empreendimento', value_in_rows=[
-                    'Edifício Adelaide Santiago - Avulsos',
-                    'Edifício Apogée - Avulsos',
-                    'Edifício Avignon - Avulsos',
-                    'Edifício Brooklyn - Avulsos',
-                    "Edifício L'Essence - Avulsos",
-                    'Edifício Neuchâtel - Avulsos',
-                    'Edifício Saint Tropez - Avulsos',
-                    'Le Sommet - Avulsos',
-                    'Manhattan Square - Avulsos',
-                    'Olga Gutierrez - Avulsos',
-                    'Palo Alto Residences - Avulsos',
-                    'Park Residence Condomínio Resort - Avulsos',
-                    'The Plaza - Avulsos',
-                    'Unique - Avulsos',
-                    'Villaggio Gutierrez - Avulsos'
-                ])\
+                .rows_to_remove_include(column='Nome Do Empreendimento', text_include="Avulsos")\
                 .df
                 
     def __integraWeb_dadoscontrato_filtros(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -192,23 +176,7 @@ class ImobmeExceltoConvert():
                     'Ativo',
                     'Quitado'
                 ])\
-                .rows_to_remove(column='Empreendimento', value_in_rows=[
-                    'Edifício Adelaide Santiago - Avulsos',
-                    'Edifício Apogée - Avulsos',
-                    'Edifício Avignon - Avulsos',
-                    'Edifício Brooklyn - Avulsos',
-                    "Edifício L'Essence - Avulsos",
-                    'Edifício Neuchâtel - Avulsos',
-                    'Edifício Saint Tropez - Avulsos',
-                    'Le Sommet - Avulsos',
-                    'Manhattan Square - Avulsos',
-                    'Olga Gutierrez - Avulsos',
-                    'Palo Alto Residences - Avulsos',
-                    'Park Residence Condomínio Resort - Avulsos',
-                    'The Plaza - Avulsos',
-                    'Unique - Avulsos',
-                    'Villaggio Gutierrez - Avulsos'
-                ])\
+                .rows_to_remove_include(column='Empreendimento', text_include="Avulsos")\
                 .df
     
 class TratamentoDF:
@@ -232,6 +200,12 @@ class TratamentoDF:
     def rows_to_remove(self, *, column:str, value_in_rows:list):
         for rows in value_in_rows:
             self.df = self.df[self.df[column] != rows]
+        return self
+    
+    def rows_to_remove_include(self, *, column:str, text_include:str):
+        self.df = self.df[
+            ~self.df[column].str.contains(text_include, case=False)
+        ]
         return self
 
 if __name__ == "__main__":
