@@ -133,8 +133,8 @@ class ImobmeExceltoConvert():
         return True
     
     def __integraWeb_empreendimentos_filtros(self, df:pd.DataFrame) -> pd.DataFrame:
-        return TratamentoDF(df
-                ).columns_to_remove(columns_to_remove=[
+        return TratamentoDF(df)\
+                .columns_to_remove(columns_to_remove=[
                     'Área Terreno',
                     'Área Construída',
                     'Valor Reconstrução',
@@ -152,7 +152,8 @@ class ImobmeExceltoConvert():
                     'Número De Dormitórios',
                     'Número De Banheiro',
                     'PEP Personalização'
-                ]).rows_to_remove(column='Status Da Unidade', value_in_rows=[
+                ])\
+                .rows_to_remove(column='Status Da Unidade', value_in_rows=[
                     'Quitada',
                     #'Vendida',
                     #'Bloqueada',
@@ -161,17 +162,54 @@ class ImobmeExceltoConvert():
                     #'Contratos - Validação',
                     #'Em Efetivação',
                     #'Disponível'
-                ]).df
+                ])\
+                .rows_to_remove(column='Nome Do Empreendimento', value_in_rows=[
+                    'Edifício Adelaide Santiago - Avulsos',
+                    'Edifício Apogée - Avulsos',
+                    'Edifício Avignon - Avulsos',
+                    'Edifício Brooklyn - Avulsos',
+                    "Edifício L'Essence - Avulsos",
+                    'Edifício Neuchâtel - Avulsos',
+                    'Edifício Saint Tropez - Avulsos',
+                    'Le Sommet - Avulsos',
+                    'Manhattan Square - Avulsos',
+                    'Olga Gutierrez - Avulsos',
+                    'Palo Alto Residences - Avulsos',
+                    'Park Residence Condomínio Resort - Avulsos',
+                    'The Plaza - Avulsos',
+                    'Unique - Avulsos',
+                    'Villaggio Gutierrez - Avulsos'
+                ])\
+                .df
                 
     def __integraWeb_dadoscontrato_filtros(self, df: pd.DataFrame) -> pd.DataFrame:
-        return TratamentoDF(df
-                ).rows_to_keep(column='Tipo de Contrato', value_in_rows=[
+        return TratamentoDF(df)\
+                .rows_to_keep(column='Tipo de Contrato', value_in_rows=[
                     'PCV',
                     'Cessão'
-                ]).rows_to_keep(column='Status', value_in_rows=[
+                ])\
+                .rows_to_keep(column='Status', value_in_rows=[
                     'Ativo',
                     'Quitado'
-                ]).df    
+                ])\
+                .rows_to_remove(column='Empreendimento', value_in_rows=[
+                    'Edifício Adelaide Santiago - Avulsos',
+                    'Edifício Apogée - Avulsos',
+                    'Edifício Avignon - Avulsos',
+                    'Edifício Brooklyn - Avulsos',
+                    "Edifício L'Essence - Avulsos",
+                    'Edifício Neuchâtel - Avulsos',
+                    'Edifício Saint Tropez - Avulsos',
+                    'Le Sommet - Avulsos',
+                    'Manhattan Square - Avulsos',
+                    'Olga Gutierrez - Avulsos',
+                    'Palo Alto Residences - Avulsos',
+                    'Park Residence Condomínio Resort - Avulsos',
+                    'The Plaza - Avulsos',
+                    'Unique - Avulsos',
+                    'Villaggio Gutierrez - Avulsos'
+                ])\
+                .df
     
 class TratamentoDF:
     def __init__(self, df: pd.DataFrame) -> None:
