@@ -163,7 +163,13 @@ class ImobmeExceltoConvert():
                     #'Em Efetivação',
                     #'Disponível'
                 ])\
-                .rows_to_remove_include(column='Nome Do Empreendimento', text_include="Avulsos")\
+                .rows_to_keep(column='Nome Do Empreendimento', value_in_rows=[
+                    "Novolar Alamedas do Brito"
+                    "Novolar Atlanta"
+                    "Novolar Green Life"
+                    "Novolar Jardins do Brito"
+                    "Novolar Moinho"
+                ])\
                 .df
                 
     def __integraWeb_dadoscontrato_filtros(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -176,7 +182,13 @@ class ImobmeExceltoConvert():
                     'Ativo',
                     'Quitado'
                 ])\
-                .rows_to_remove_include(column='Empreendimento', text_include="Avulsos")\
+                .rows_to_keep(column='Empreendimento', value_in_rows=[
+                    "Novolar Alamedas do Brito"
+                    "Novolar Atlanta"
+                    "Novolar Green Life"
+                    "Novolar Jardins do Brito"
+                    "Novolar Moinho"
+                ])\
                 .df
     
 class TratamentoDF:
