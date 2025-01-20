@@ -6,7 +6,7 @@ default:Dict[str, Dict[str,object]] = {
         'sftp': 'IntegracaoWebSFTP'
     },
     'log': {
-        'host': '127.0.0.1',
+        'host': 'Patrimar-RPA',
         'port': '8000',
         'token': ''  
     },

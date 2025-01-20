@@ -164,11 +164,11 @@ class ImobmeExceltoConvert():
                     #'Disponível'
                 ])\
                 .rows_to_keep(column='Nome Do Empreendimento', value_in_rows=[
-                    "Novolar Alamedas do Brito"
-                    "Novolar Atlanta"
-                    "Novolar Green Life"
-                    "Novolar Jardins do Brito"
-                    "Novolar Moinho"
+                    "Novolar Alamedas do Brito",
+                    "Novolar Atlanta",
+                    "Novolar Green Life",
+                    "Novolar Jardins do Brito",
+                    "Novolar Moinho",
                 ])\
                 .df
                 
@@ -183,11 +183,11 @@ class ImobmeExceltoConvert():
                     'Quitado'
                 ])\
                 .rows_to_keep(column='Empreendimento', value_in_rows=[
-                    "Novolar Alamedas do Brito"
-                    "Novolar Atlanta"
-                    "Novolar Green Life"
-                    "Novolar Jardins do Brito"
-                    "Novolar Moinho"
+                    "Novolar Alamedas do Brito",
+                    "Novolar Atlanta",
+                    "Novolar Green Life",
+                    "Novolar Jardins do Brito",
+                    "Novolar Moinho",
                 ])\
                 .df
     
