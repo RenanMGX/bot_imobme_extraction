@@ -169,6 +169,7 @@ class ImobmeExceltoConvert():
                     "Novolar Green Life",
                     "Novolar Jardins do Brito",
                     "Novolar Moinho",
+                    "Novolar Solare",
                 ])\
                 .df
                 
@@ -188,6 +189,7 @@ class ImobmeExceltoConvert():
                     "Novolar Green Life",
                     "Novolar Jardins do Brito",
                     "Novolar Moinho",
+                    "Novolar Solare",
                 ])\
                 .df
     
