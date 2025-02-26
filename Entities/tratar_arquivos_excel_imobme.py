@@ -6,7 +6,7 @@ import pandas as pd
 import xlwings as xw # type: ignore
 from copy import deepcopy
 from time import sleep
-from typing import Dict
+from typing import Dict, Literal
 from datetime import datetime
 import traceback
 from getpass import getuser
@@ -109,7 +109,7 @@ class ImobmeExceltoConvert():
             
         return True
 
-    def extract_csv_integraWeb(self, copyto:str) -> bool:
+    def extract_csv_integraWeb(self, copyto:str, *, tag_test:Literal["", "_Teste_SP", "_Teste_MG"]="", empreendimentos:list=[]) -> bool:
         """funciona do mesmo jeito que o self.extract_csv porem contem algumas regras de tratativas de dados
 
         Args:
@@ -125,12 +125,21 @@ class ImobmeExceltoConvert():
             
             if "Empreendimentos" in file_name:
                 df = self.__integraWeb_empreendimentos_filtros(df)
+                if empreendimentos:
+                    df = TratamentoDF(df)
+                    df.rows_to_keep(column='Nome Do Empreendimento', value_in_rows=empreendimentos)
+                    df = df.df
             elif "DadosContrato" in file_name:
                 df = self.__integraWeb_dadoscontrato_filtros(df)
+                if empreendimentos:
+                    df = TratamentoDF(df)
+                    df.rows_to_keep(column='Empreendimento', value_in_rows=empreendimentos)
+                    df = df.df
             
-            df.to_csv(((copyto + datetime.now().strftime('%d-%m-%Y_') + file_name) + ".csv") , sep=';', index=False, encoding='latin1', errors='ignore', decimal=',')
+            df.to_csv(os.path.join(os.path.normpath(copyto), datetime.now().strftime(f'%d-%m-%Y_{file_name}{tag_test}.csv')) , sep=';', index=False, encoding='latin1', errors='ignore', decimal=',')
         
         return True
+    
     
     def __integraWeb_empreendimentos_filtros(self, df:pd.DataFrame) -> pd.DataFrame:
         return TratamentoDF(df)\
@@ -163,15 +172,16 @@ class ImobmeExceltoConvert():
                     #'Em Efetivação',
                     #'Disponível'
                 ])\
-                .rows_to_keep(column='Nome Do Empreendimento', value_in_rows=[
-                    "Novolar Alamedas do Brito",
-                    "Novolar Atlanta",
-                    "Novolar Green Life",
-                    "Novolar Jardins do Brito",
-                    "Novolar Moinho",
-                    "Novolar Solare",
-                ])\
                 .df
+                # .rows_to_keep(column='Nome Do Empreendimento', value_in_rows=[
+                #     "Novolar Alamedas do Brito",
+                #     "Novolar Atlanta",
+                #     "Novolar Green Life",
+                #     "Novolar Jardins do Brito",
+                #     "Novolar Moinho",
+                #     "Novolar Solare",
+                # ])\
+                # .df
                 
     def __integraWeb_dadoscontrato_filtros(self, df: pd.DataFrame) -> pd.DataFrame:
         return TratamentoDF(df)\
@@ -183,15 +193,16 @@ class ImobmeExceltoConvert():
                     'Ativo',
                     'Quitado'
                 ])\
-                .rows_to_keep(column='Empreendimento', value_in_rows=[
-                    "Novolar Alamedas do Brito",
-                    "Novolar Atlanta",
-                    "Novolar Green Life",
-                    "Novolar Jardins do Brito",
-                    "Novolar Moinho",
-                    "Novolar Solare",
-                ])\
                 .df
+                # .rows_to_keep(column='Empreendimento', value_in_rows=[
+                #     "Novolar Alamedas do Brito",
+                #     "Novolar Atlanta",
+                #     "Novolar Green Life",
+                #     "Novolar Jardins do Brito",
+                #     "Novolar Moinho",
+                #     "Novolar Solare",
+                # ])\
+                # .df
     
 class TratamentoDF:
     def __init__(self, df: pd.DataFrame) -> None:

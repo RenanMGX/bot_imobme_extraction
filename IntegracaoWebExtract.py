@@ -12,7 +12,11 @@ from Entities.dependencies.config import Config
 import shutil
 import traceback
 
-TRANSFERIR_FTP:bool = True
+
+## Configurações
+TRANSFERIR_FTP:bool = True # Alterar para True para transferir via SFTP
+EXTRAIR_IMOBME:bool = True # Alterar para True para extrair relatorios da Imobme
+###############
 
 if __name__ == "__main__":
     try:
@@ -22,14 +26,15 @@ if __name__ == "__main__":
 
         down_path = os.path.join(os.getcwd(), "downloads_IntegracaoWeb\\")
         
-        ## extrair relatorio        
-        bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path)
+        if EXTRAIR_IMOBME:
+            ## extrair relatorio        
+            bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path)
 
-        bot_relatorio.start([
-            "imobme_dados_contrato",
-            "imobme_empreendimento"
-            ])
-        ## extrair relatorio  -- fim
+            bot_relatorio.start([
+                "imobme_dados_contrato",
+                "imobme_empreendimento"
+                ])
+            ## extrair relatorio  -- fim
 
         arquivos = []
         for files in os.listdir(down_path):
@@ -46,7 +51,43 @@ if __name__ == "__main__":
                 elif os.path.isdir(file):
                     shutil.rmtree(file)
 
-        ImobmeExceltoConvert(path=down_path).extract_csv_integraWeb(caminho_temp)
+        ImobmeExceltoConvert(path=down_path).extract_csv_integraWeb(
+            caminho_temp,
+            empreendimentos=[
+                    "Novolar Alamedas do Brito",
+                    "Novolar Atlanta",
+                    "Novolar Green Life",
+                    "Novolar Jardins do Brito",
+                    "Novolar Moinho",
+                    "Novolar Solare",
+            ]
+            )
+        
+        ############### RELATORIO PARA TESTE ####################
+        ImobmeExceltoConvert(path=down_path).extract_csv_integraWeb(
+            caminho_temp,
+            tag_test='_Teste_SP',
+            empreendimentos=[
+                "Novolar Jardins",
+                "Green View",
+                "Novolar Absolute",
+                "Novolar Reserva Laguna",
+            ]
+            )
+        
+        ImobmeExceltoConvert(path=down_path).extract_csv_integraWeb(
+            caminho_temp,
+            tag_test='_Teste_MG',
+            empreendimentos=[
+                "Mirante Estoril",
+                "Alta Vista Estoril",
+                "Novolar Prime View",
+                "Novolar Valência",
+                "Novolar Sevilha",
+                "Novolar Viena",
+            ]
+            )
+        
 
         arquivos_do_temp = []
         for arqui in os.listdir(caminho_temp):
@@ -66,4 +107,3 @@ if __name__ == "__main__":
         Logs().register(status='Concluido', description='Extração de relatorios da Integração web foi concluida!')
     except Exception as err:
         Logs().register(status='Error', description='erro ao executar o extração dos relatorios da integração web', exception=traceback.format_exc())
-
