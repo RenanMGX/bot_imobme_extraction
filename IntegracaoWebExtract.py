@@ -16,6 +16,7 @@ import traceback
 ## Configurações
 TRANSFERIR_FTP:bool = True # Alterar para True para transferir via SFTP
 EXTRAIR_IMOBME:bool = True # Alterar para True para extrair relatorios da Imobme
+TESTE:bool = False
 ###############
 
 if __name__ == "__main__":
@@ -60,33 +61,44 @@ if __name__ == "__main__":
                     "Novolar Jardins do Brito",
                     "Novolar Moinho",
                     "Novolar Solare",
+                    "Novolar Jardins",
+                    "Green View",
+                    "Novolar Absolute",
+                    "Novolar Reserva Laguna",
+                    "Mirante Estoril",
+                    "Alta Vista Estoril",
+                    "Novolar Prime View",
+                    "Novolar Valência",
+                    "Novolar Sevilha",
+                    "Novolar Viena",
             ]
             )
         
-        ############### RELATORIO PARA TESTE ####################
-        ImobmeExceltoConvert(path=down_path).extract_csv_integraWeb(
-            caminho_temp,
-            tag_test='_Teste_SP',
-            empreendimentos=[
-                "Novolar Jardins",
-                "Green View",
-                "Novolar Absolute",
-                "Novolar Reserva Laguna",
-            ]
-            )
-        
-        ImobmeExceltoConvert(path=down_path).extract_csv_integraWeb(
-            caminho_temp,
-            tag_test='_Teste_MG',
-            empreendimentos=[
-                "Mirante Estoril",
-                "Alta Vista Estoril",
-                "Novolar Prime View",
-                "Novolar Valência",
-                "Novolar Sevilha",
-                "Novolar Viena",
-            ]
-            )
+        if TESTE:
+            ############### RELATORIO PARA TESTE ####################
+            ImobmeExceltoConvert(path=down_path).extract_csv_integraWeb(
+                caminho_temp,
+                tag_test='_Teste_SP',
+                empreendimentos=[
+                    "Novolar Jardins",
+                    "Green View",
+                    "Novolar Absolute",
+                    "Novolar Reserva Laguna",
+                ]
+                )
+            
+            ImobmeExceltoConvert(path=down_path).extract_csv_integraWeb(
+                caminho_temp,
+                tag_test='_Teste_MG',
+                empreendimentos=[
+                    "Mirante Estoril",
+                    "Alta Vista Estoril",
+                    "Novolar Prime View",
+                    "Novolar Valência",
+                    "Novolar Sevilha",
+                    "Novolar Viena",
+                ]
+                )
         
 
         arquivos_do_temp = []

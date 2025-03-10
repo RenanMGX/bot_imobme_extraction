@@ -191,7 +191,7 @@ class ImobmeExceltoConvert():
                 ])\
                 .rows_to_keep(column='Status', value_in_rows=[
                     'Ativo',
-                    'Quitado'
+                    #'Quitado',
                 ])\
                 .df
                 # .rows_to_keep(column='Empreendimento', value_in_rows=[
