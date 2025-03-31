@@ -535,12 +535,28 @@ class BotExtractionImobme():
                 tbody = table.find_element(By.TAG_NAME, 'tbody')
                 for tr in tbody.find_elements(By.TAG_NAME, 'tr'):
                     for id in relatories_id:
+                        downloaded = False
                         if id == tr.find_elements(By.TAG_NAME, 'td')[0].text:
                             for tag_a in tr.find_elements(By.TAG_NAME, 'a'):
                                 if tag_a.get_attribute('title') == 'Download':
                                     print(P(f"o {relatories_id=} foi baixado!", color='green'))
                                     tag_a.send_keys(Keys.ENTER)
                                     relatories_id.pop(relatories_id.index(id))
+                                    downloaded = True
+                                try:
+                                    if downloaded:
+                                        if tag_a.get_attribute('title') == 'Excluir':
+                                            tag_a.send_keys(Keys.ENTER)
+                                            _find_element(browser=self.navegador, mod=By.XPATH, target='/html/body/div[5]/div[3]/div/button[1]/span').click()
+                                            print(P(f"o {relatories_id=} foi excluido!", color='red'))
+                                except:
+                                    pass
+                                try:
+                                    _find_element(browser=self.navegador, mod=By.XPATH, target='/html/body/div[5]/div[3]/div/button[2]/span').click()
+                                except:
+                                    pass
+                                        
+
             except:
                 sleep(5)
                 continue
