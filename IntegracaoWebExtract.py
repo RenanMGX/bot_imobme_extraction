@@ -54,22 +54,6 @@ if __name__ == "__main__":
 
         ImobmeExceltoConvert(path=down_path).extract_csv_integraWeb(
             caminho_temp,
-            empreendimentos=[
-                    "Novolar Alamedas do Brito",
-                    "Novolar Atlanta",
-                    "Novolar Green Life",
-                    "Novolar Jardins do Brito",
-                    "Novolar Moinho",
-                    "Novolar Solare",
-                    "Novolar Jardins",
-                    "Green View",
-                    "Novolar Absolute",
-                    "Mirante Estoril",
-                    "Alta Vista Estoril",
-                    "Novolar Valência",
-                    "Novolar Sevilha",
-                    "Novolar Viena",
-            ]
             )
         
         if TESTE:

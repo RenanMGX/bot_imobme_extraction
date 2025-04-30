@@ -10,6 +10,7 @@ from typing import Dict, Literal
 from datetime import datetime
 import traceback
 from getpass import getuser
+from registros import Registros
 
 class ImobmeExceltoConvert():
     def __init__(self, path:str) -> None:
@@ -142,67 +143,40 @@ class ImobmeExceltoConvert():
     
     
     def __integraWeb_empreendimentos_filtros(self, df:pd.DataFrame) -> pd.DataFrame:
-        return TratamentoDF(df)\
-                .columns_to_remove(columns_to_remove=[
-                    'Área Terreno',
-                    'Área Construída',
-                    'Valor Reconstrução',
-                    'Matrícula',
-                    'Registro',
-                    'PEP Empreendimento',
-                    'Número De Unidades',
-                    'Data Da Opção da Planta Fase',
-                    'Andar Início',
-                    'Andar Fim',
-                    'Data Opção Planta Bloco',
-                    'Data Habite-se Bloco',
-                    'Número Do Andar',
-                    'Código Do Final',
-                    'Número De Dormitórios',
-                    'Número De Banheiro',
-                    'PEP Personalização'
-                ])\
-                .rows_to_remove(column='Status Da Unidade', value_in_rows=[
-                    'Quitada',
-                    #'Vendida',
-                    #'Bloqueada',
-                    'Permuta',
-                    #'Análise de Crédito / Risco',
-                    #'Contratos - Validação',
-                    #'Em Efetivação',
-                    #'Disponível'
-                ])\
-                .df
-                # .rows_to_keep(column='Nome Do Empreendimento', value_in_rows=[
-                #     "Novolar Alamedas do Brito",
-                #     "Novolar Atlanta",
-                #     "Novolar Green Life",
-                #     "Novolar Jardins do Brito",
-                #     "Novolar Moinho",
-                #     "Novolar Solare",
-                # ])\
-                # .df
+        r = Registros('integraWeb_filtros_empreendimentos')
+        lista_filtros = r.load_all()
+        
+        for key, value in lista_filtros.items():
+            if value['type'] == 'columnsToRemove':
+                df = TratamentoDF(df).columns_to_remove(columns_to_remove=value['columns']).df
+            elif value['type'] == 'columnsToKeep':
+                df = TratamentoDF(df).columns_to_keep(columns_to_keep=value['columns']).df
+            elif value['type'] == 'rowsToKeep':
+                df = TratamentoDF(df).rows_to_keep(column=value['column'], value_in_rows=value['value_in_rows']).df
+            elif value['type'] == 'rowsToRemove':
+                df = TratamentoDF(df).rows_to_remove(column=value['column'], value_in_rows=value['value_in_rows']).df
+            elif value['type'] == 'rowsToRemoveByInclude':
+                df = TratamentoDF(df).rows_to_remove_include(column=value['column'], text_include=value['text_include']).df
+
+        return df
                 
     def __integraWeb_dadoscontrato_filtros(self, df: pd.DataFrame) -> pd.DataFrame:
-        return TratamentoDF(df)\
-                .rows_to_keep(column='Tipo de Contrato', value_in_rows=[
-                    'PCV',
-                    'Cessão'
-                ])\
-                .rows_to_keep(column='Status', value_in_rows=[
-                    'Ativo',
-                    #'Quitado',
-                ])\
-                .df
-                # .rows_to_keep(column='Empreendimento', value_in_rows=[
-                #     "Novolar Alamedas do Brito",
-                #     "Novolar Atlanta",
-                #     "Novolar Green Life",
-                #     "Novolar Jardins do Brito",
-                #     "Novolar Moinho",
-                #     "Novolar Solare",
-                # ])\
-                # .df
+        r = Registros('integraWeb_filtros_dadoscontrato')
+        lista_filtros = r.load_all()
+        
+        for key, value in lista_filtros.items():
+            if value['type'] == 'columnsToRemove':
+                df = TratamentoDF(df).columns_to_remove(columns_to_remove=value['columns']).df
+            elif value['type'] == 'columnsToKeep':
+                df = TratamentoDF(df).columns_to_keep(columns_to_keep=value['columns']).df
+            elif value['type'] == 'rowsToKeep':
+                df = TratamentoDF(df).rows_to_keep(column=value['column'], value_in_rows=value['value_in_rows']).df
+            elif value['type'] == 'rowsToRemove':
+                df = TratamentoDF(df).rows_to_remove(column=value['column'], value_in_rows=value['value_in_rows']).df
+            elif value['type'] == 'rowsToRemoveByInclude':
+                df = TratamentoDF(df).rows_to_remove_include(column=value['column'], text_include=value['text_include']).df
+        
+        return df
     
 class TratamentoDF:
     def __init__(self, df: pd.DataFrame) -> None:
@@ -211,26 +185,48 @@ class TratamentoDF:
     def columns_to_remove(self, *, columns_to_remove:list):
         columns = self.df.columns.to_list()
         for column in columns_to_remove:
-            columns.pop(columns.index(column))
+            try:
+                columns.pop(columns.index(column))
+            except:
+                pass
         self.df = self.df[columns]
         return self
     
+    def columns_to_keep(self, *, columns_to_keep:list):
+        columns_all = self.df.columns.to_list()
+        new_columns = []
+        for column in columns_to_keep:
+            if column in columns_all:
+                new_columns.append(column)
+        
+        self.df = self.df[new_columns]
+        return self
+    
     def rows_to_keep(self, *, column:str, value_in_rows:list):
-        df_temp:pd.DataFrame = pd.DataFrame()
-        for rows in value_in_rows:
-            df_temp = pd.concat([df_temp, self.df[self.df[column] == rows]], ignore_index=True)
-        self.df = df_temp
+        if column in self.df.columns:
+            df_temp:pd.DataFrame = pd.DataFrame()
+            for rows in value_in_rows:
+                try:
+                    df_temp = pd.concat([df_temp, self.df[self.df[column] == rows]], ignore_index=True)
+                except:
+                    pass
+            self.df = df_temp
         return self
     
     def rows_to_remove(self, *, column:str, value_in_rows:list):
-        for rows in value_in_rows:
-            self.df = self.df[self.df[column] != rows]
+        if column in self.df.columns:
+            for rows in value_in_rows:
+                try:
+                    self.df = self.df[self.df[column] != rows]
+                except:
+                    pass
         return self
     
     def rows_to_remove_include(self, *, column:str, text_include:str):
-        self.df = self.df[
-            ~self.df[column].str.contains(text_include, case=False)
-        ]
+        if column in self.df.columns:
+            self.df = self.df[
+                ~self.df[column].str.contains(text_include, case=False)
+            ]
         return self
 
 if __name__ == "__main__":

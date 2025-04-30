@@ -539,7 +539,8 @@ class BotExtractionImobme():
                         if id == tr.find_elements(By.TAG_NAME, 'td')[0].text:
                             for tag_a in tr.find_elements(By.TAG_NAME, 'a'):
                                 if tag_a.get_attribute('title') == 'Download':
-                                    print(P(f"o {relatories_id=} foi baixado!", color='green'))
+                                    print()
+                                    print(P(f"o {id=} foi baixado!", color='green'))
                                     tag_a.send_keys(Keys.ENTER)
                                     relatories_id.pop(relatories_id.index(id))
                                     downloaded = True
@@ -548,7 +549,8 @@ class BotExtractionImobme():
                                         if tag_a.get_attribute('title') == 'Excluir':
                                             tag_a.send_keys(Keys.ENTER)
                                             _find_element(browser=self.navegador, mod=By.XPATH, target='/html/body/div[5]/div[3]/div/button[1]/span').click()
-                                            print(P(f"o {relatories_id=} foi excluido!", color='red'))
+                                            print()
+                                            print(P(f"o {id=} foi excluido!", color='red'))
                                 except:
                                     pass
                                 try:
@@ -563,7 +565,9 @@ class BotExtractionImobme():
             
             _find_element(browser=self.navegador, mod=By.ID, target='btnProximaDefinicao').click()
             sleep(5)
-            print(P("Atualizando Pagina"))
+            print(P("Atualizando Pagina", color='yellow'), end='\r')
+        print()
+        
         
         print(P("verificando pasta de download"))
         for _ in range(10*60):
