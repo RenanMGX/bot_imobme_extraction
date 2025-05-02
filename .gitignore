@@ -22,6 +22,7 @@
 *config.init
 *Logs
 *temp_IntegracaoWeb
+*temp_IntegracaoWeb_Django
 *.ipynb
 *.json
 
