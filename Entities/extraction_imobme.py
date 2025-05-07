@@ -64,7 +64,7 @@ def _find_element(*, browser: webdriver.Chrome, mod, target:str, timeout:int=30,
 
 
 class BotExtractionImobme():
-    def __init__(self, user:str, password:str, download_path:str=f"{os.getcwd()}\\downloads\\") -> None:
+    def __init__(self, user:str, password:str, download_path:str=f"{os.getcwd()}\\downloads\\", *, headless:bool=True) -> None:
         self.__user:str = user
         self.__password:str = password
         self.download_path:str = download_path
@@ -80,7 +80,13 @@ class BotExtractionImobme():
                     
         prefs: dict = {"download.default_directory" : self.download_path}
         chrome_options: Options = Options()
-        chrome_options.add_experimental_option("prefs", prefs)     
+        chrome_options.add_experimental_option("prefs", prefs)
+        if headless:
+            chrome_options.add_argument("--headless")  # Ativa o modo headless
+            chrome_options.add_argument("--disable-gpu")  # Desativa o uso de GPU (opcional)
+            chrome_options.add_argument("--window-size=1920,1080")  # Define o tamanho da janela (opcional)
+            chrome_options.add_argument("--no-sandbox")  # Necessário em alguns ambientes Linux
+            chrome_options.add_argument("--disable-dev-shm-usage")  # Evita problemas de memória compartilhada         
         
         self.navegador: webdriver.Chrome = webdriver.Chrome(options=chrome_options)
         self.navegador.get("http://patrimarengenharia.imobme.com/Autenticacao/Login")
