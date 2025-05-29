@@ -22,7 +22,7 @@ if __name__ == "__main__":
 
         for x in range(3):
             try:
-                bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path)
+                bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path, headless=False)
 
                 bot_relatorio.start(["imobme_controle_vendas_90_dias", "imobme_contratos_rescindidos_90_dias", "imobme_relacao_clientes_x_clientes"])
 
