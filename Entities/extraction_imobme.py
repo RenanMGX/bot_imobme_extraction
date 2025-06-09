@@ -295,7 +295,6 @@ class BotExtractionImobme():
 
             elif (relatorie:="imobme_dados_contrato") == rel:
                 finalizou:bool = False
-                import pdb; pdb.set_trace()
                 for num in range(5):
                     try:
                         for _ in range(NUM_TENTATIVAS):
