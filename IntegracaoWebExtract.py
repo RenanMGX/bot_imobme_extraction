@@ -29,7 +29,7 @@ if __name__ == "__main__":
         
         if EXTRAIR_IMOBME:
             ## extrair relatorio        
-            bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path)
+            bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path, headless=False)
 
             bot_relatorio.start([
                 "imobme_dados_contrato",

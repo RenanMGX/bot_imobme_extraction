@@ -21,7 +21,7 @@ def execute(lista:list, download:str="fin"):
         down_path = os.path.join(os.getcwd(), f"downloads_{download}") + "\\"
         for _ in range(5):
             try:   
-                bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path)
+                bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path, headless=False)
                 
                 bot_relatorio.start(lista)
                 ImobmeExceltoConvert(path=down_path).extract_json(path)

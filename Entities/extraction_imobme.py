@@ -136,7 +136,6 @@ class BotExtractionImobme():
         self.navegador.get("https://patrimarengenharia.imobme.com/Relatorio/")
         self.navegador.maximize_window()
         
-        
         for rel in relatories:
             if (relatorie:="imobme_empreendimento") == rel:
                 finalizou:bool = False
@@ -296,6 +295,7 @@ class BotExtractionImobme():
 
             elif (relatorie:="imobme_dados_contrato") == rel:
                 finalizou:bool = False
+                import pdb; pdb.set_trace()
                 for num in range(5):
                     try:
                         for _ in range(NUM_TENTATIVAS):
