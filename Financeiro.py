@@ -16,7 +16,7 @@ def execute(lista:list, download:str="fin"):
         if (entrada['login'] == None) or (entrada['password'] == None):
             raise PermissionError("Credenciais Invalidas")
 
-        path:str=f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA S A\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\'
+        path:str=f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA SA\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\'
         #down_path = f"{os.getcwd()}\\downloads_financeiro\\"
         down_path = os.path.join(os.getcwd(), f"downloads_{download}") + "\\"
         for _ in range(5):
