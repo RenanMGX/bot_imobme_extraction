@@ -10,13 +10,15 @@ import traceback
 from Entities.dependencies.config import Config
 import multiprocessing
 from time import sleep
+from patrimar_dependencies.sharepointfolder import SharePointFolders
 
 def execute(lista:list, download:str="fin"):
         entrada: dict = Credential(Config()['credential']['crd']).load()
         if (entrada['login'] == None) or (entrada['password'] == None):
             raise PermissionError("Credenciais Invalidas")
 
-        path:str=f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA SA\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\'
+        #path:str=f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA SA\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\'
+        path:str = SharePointFolders(r'RPA - Dados\Relatorio_Imobme_Financeiro').value
         #down_path = f"{os.getcwd()}\\downloads_financeiro\\"
         down_path = os.path.join(os.getcwd(), f"downloads_{download}") + "\\"
         for _ in range(5):
