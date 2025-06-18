@@ -87,7 +87,13 @@ class ImobmeExceltoConvert():
                 continue
             file_name = path.split('\\')[-1].split('_')[0]
             json_file = df.to_json(orient='records', date_format='iso')
-            with open(((copyto + file_name) + ".json"), 'w')as _file:
+            file_target_path = ((copyto + file_name) + ".json")
+            if os.path.exists(file_target_path):
+                try:
+                    os.unlink(file_target_path)
+                except Exception as error:
+                    pass
+            with open(file_target_path, 'w')as _file:
                 _file.write(json_file)
                 
         return True

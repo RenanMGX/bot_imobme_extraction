@@ -55,7 +55,10 @@ class Logs:
 
             response = requests.request("PATCH", reqUrl, data=payload,  headers=headersList)
 
-            #print(response.text)
+            if response.status_code != 200:
+                print(response.status_code)
+                print(response.reason)
+                print(response.text)
         except Exception as error:
             print(error)
                     
