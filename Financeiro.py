@@ -17,11 +17,10 @@ def execute(lista:list, download:str="fin"):
         if (entrada['login'] == None) or (entrada['password'] == None):
             raise PermissionError("Credenciais Invalidas")
 
-        #path:str=f'C:\\Users\\{getuser()}\\PATRIMAR ENGENHARIA SA\\RPA - Documentos\\RPA - Dados\\Relatorio_Imobme_Financeiro\\'
         path:str = SharePointFolders(r'RPA - Dados\Relatorio_Imobme_Financeiro').value
         #down_path = f"{os.getcwd()}\\downloads_financeiro\\"
         down_path = os.path.join(os.getcwd(), f"downloads_{download}") + "\\"
-        for _ in range(5):
+        for _ in range(3):
             try:   
                 bot_relatorio = BotExtractionImobme(user=entrada['login'],password=entrada['password'],download_path=down_path, headless=False)
                 
@@ -77,6 +76,7 @@ if __name__ == "__main__":
         primeiro.join()
         segundo.join()
         terceiro.join()
+        
         
         
         Logs().register(status='Concluido', description='Extração de relatorios do Financeiro concluida!')
