@@ -33,7 +33,8 @@ if __name__ == "__main__":
 
             bot_relatorio.start([
                 "imobme_dados_contrato",
-                "imobme_empreendimento"
+                "imobme_empreendimento",
+                #"recebimentos_compensados"
                 ])
             ## extrair relatorio  -- fim
 

@@ -601,7 +601,7 @@ class BotExtractionImobme():
         
         for tag_li in ul_tag.find_elements(By.TAG_NAME, 'li'):
             try:
-                if tag_li.text == relat:
+                if tag_li.text.lower().replace(" ", "") == relat.lower().replace(" ", ""):
                     tag_li.click()
                     return
             except Exception as error:
