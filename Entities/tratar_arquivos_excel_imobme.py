@@ -148,6 +148,7 @@ class ImobmeExceltoConvert():
         return True
     
     
+    
     def __integraWeb_empreendimentos_filtros(self, df:pd.DataFrame) -> pd.DataFrame:
         r = Registros('integraWeb_filtros_empreendimentos')
         lista_filtros = r.load_all()
